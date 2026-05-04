@@ -1,0 +1,65 @@
+{"file": ".opencode/commands/trellis/finish-work.md", "reason": "Finish work checklist"}
+{"file": ".opencode/commands/trellis/check.md", "reason": "Code quality check spec"}
+{"file": ".trellis/tasks/00-bootstrap-guidelines/prd.md", "reason": "Verify generated guideline matches source"}
+{"file": "CLAUDE.md", "reason": "Verify generated guideline matches source"}
+{"file": "CONTRIBUTING.md", "reason": "Verify generated guideline matches source"}
+{"file": "AGENTS.md", "reason": "Verify generated guideline matches source"}
+{"file": "package.json", "reason": "Verify generated guideline matches source"}
+{"file": "packages/cli/package.json", "reason": "Verify generated guideline matches source"}
+{"file": "packages/cli/tsconfig.json", "reason": "Verify generated guideline matches source"}
+{"file": "packages/cli/eslint.config.js", "reason": "Verify generated guideline matches source"}
+{"file": "packages/cli/.prettierrc", "reason": "Verify generated guideline matches source"}
+{"file": "packages/cli/src/cli/index.ts", "reason": "Verify generated guideline matches source"}
+{"file": "packages/cli/src/commands/init.ts", "reason": "Verify generated guideline matches source"}
+{"file": "packages/cli/src/commands/update.ts", "reason": "Verify generated guideline matches source"}
+{"file": "packages/cli/src/commands/uninstall.ts", "reason": "Verify generated guideline matches source"}
+{"file": "packages/cli/src/configurators/shared.ts", "reason": "Verify generated guideline matches source"}
+{"file": "packages/cli/src/configurators/index.ts", "reason": "Verify generated guideline matches source"}
+{"file": "packages/cli/src/constants/paths.ts", "reason": "Verify generated guideline matches source"}
+{"file": "packages/cli/src/utils/file-writer.ts", "reason": "Verify generated guideline matches source"}
+{"file": "packages/cli/src/utils/project-detector.ts", "reason": "Verify generated guideline matches source"}
+{"file": "packages/cli/src/utils/template-fetcher.ts", "reason": "Verify generated guideline matches source"}
+{"file": "packages/cli/test/commands/init.integration.test.ts", "reason": "Verify generated guideline matches source"}
+{"file": "packages/cli/test/utils/file-writer.test.ts", "reason": "Verify generated guideline matches source"}
+{"file": ".trellis/spec/guides/index.md", "reason": "Verify generated guideline matches source"}
+{"file": ".trellis/spec/guides/code-reuse-thinking-guide.md", "reason": "Verify generated guideline matches source"}
+{"file": ".trellis/spec/guides/cross-layer-thinking-guide.md", "reason": "Verify generated guideline matches source"}
+{"file": ".trellis/spec/docs-site/backend/database-guidelines.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/docs-site/backend/directory-structure.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/docs-site/backend/error-handling.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/docs-site/backend/index.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/docs-site/backend/logging-guidelines.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/docs-site/backend/quality-guidelines.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/docs-site/frontend/component-guidelines.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/docs-site/frontend/directory-structure.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/docs-site/frontend/hook-guidelines.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/docs-site/frontend/index.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/docs-site/frontend/quality-guidelines.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/docs-site/frontend/state-management.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/docs-site/frontend/type-safety.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/marketplace/backend/database-guidelines.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/marketplace/backend/directory-structure.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/marketplace/backend/error-handling.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/marketplace/backend/index.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/marketplace/backend/logging-guidelines.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/marketplace/backend/quality-guidelines.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/marketplace/frontend/component-guidelines.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/marketplace/frontend/directory-structure.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/marketplace/frontend/hook-guidelines.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/marketplace/frontend/index.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/marketplace/frontend/quality-guidelines.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/marketplace/frontend/state-management.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/marketplace/frontend/type-safety.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/trellis/backend/database-guidelines.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/trellis/backend/directory-structure.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/trellis/backend/error-handling.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/trellis/backend/index.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/trellis/backend/logging-guidelines.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/trellis/backend/quality-guidelines.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/trellis/frontend/component-guidelines.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/trellis/frontend/directory-structure.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/trellis/frontend/hook-guidelines.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/trellis/frontend/index.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/trellis/frontend/quality-guidelines.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/trellis/frontend/state-management.md", "reason": "Guideline target file"}
+{"file": ".trellis/spec/trellis/frontend/type-safety.md", "reason": "Guideline target file"}
