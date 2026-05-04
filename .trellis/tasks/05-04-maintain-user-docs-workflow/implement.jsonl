@@ -1,0 +1,4 @@
+{"file": ".trellis/workflow.md", "reason": "Project workflow and conventions"}
+{"file": ".trellis/spec/trellis/backend/index.md", "reason": "Backend development guide"}
+{"file": ".trellis/spec/trellis/backend/directory-structure.md", "reason": "Template and package layout rules"}
+{"file": ".trellis/spec/trellis/backend/quality-guidelines.md", "reason": "Testing and generated template quality rules"}

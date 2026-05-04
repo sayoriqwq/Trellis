@@ -1,11 +1,11 @@
 ---
 name: trellis-update-spec
-description: "Captures executable contracts and coding conventions into .trellis/spec/ documents. Use when learning something valuable from debugging, implementing, or discussion that should be preserved for future sessions."
+description: "Captures executable contracts into .trellis/spec/ and human-facing context into .trellis/user/. Use when learning something valuable from debugging, implementing, or discussion that should be preserved for future sessions."
 ---
 
-# Update Code-Spec - Capture Executable Contracts
+# Update Knowledge Docs - Capture Executable Contracts And User Context
 
-When you learn something valuable (from debugging, implementing, or discussion), use this to update the relevant code-spec documents.
+When you learn something valuable (from debugging, implementing, or discussion), use this to update the relevant code-spec documents and the human-facing project context docs.
 
 **Timing**: After completing a task, fixing a bug, or discovering a new pattern
 
@@ -55,9 +55,23 @@ For triggered tasks, include all sections below:
 
 **Key Insight**: Code-spec updates are NOT just for problems. Every feature implementation contains design decisions and contracts that future AI/developers need to execute safely.
 
+## When to Update User Docs
+
+`.trellis/user/` is the human-facing sibling of `.trellis/spec/`. Update it when the work changes how a developer should understand or navigate the project:
+
+| Trigger | Example | Target User Doc |
+|---------|---------|-----------------|
+| **Package map changed** | Added/removed/renamed a package or submodule | `.trellis/user/index.md` or package page |
+| **Architecture context changed** | Changed how workflow, templates, hooks, or runtime pieces fit together | Relevant `.trellis/user/*.md` |
+| **Reading order changed** | New primary entry point or setup path | `.trellis/user/index.md` |
+| **Human-facing pitfall found** | Discovered a common confusion that is not an executable coding rule | Relevant package/context page |
+| **Spec gained important context** | Added a rule humans need to understand before editing | Matching `.trellis/user/` explanation |
+
+Do not mirror every spec mechanically. Use `.trellis/user/` to explain the project map, why the rule matters, where code lives, and what a human should read next.
+
 ---
 
-## Spec Structure Overview
+## Knowledge Structure Overview
 
 ```
 .trellis/spec/
@@ -67,6 +81,10 @@ For triggered tasks, include all sections below:
 └── guides/            # Thinking checklists (NOT coding specs!)
     ├── index.md       # Guide index
     └── *.md           # Topic-specific guides
+
+.trellis/user/
+├── index.md           # Project overview, package map, reading order
+└── *.md               # Human-facing package/context pages
 ```
 
 ### CRITICAL: Code-Spec vs Guide - Know the Difference
@@ -100,7 +118,7 @@ Answer these questions:
 
 1. **What did you learn?** (Be specific)
 2. **Why is it important?** (What problem does it prevent?)
-3. **Where does it belong?** (Which spec file?)
+3. **Where does it belong?** (Which spec file, user doc, or both?)
 
 ### Step 2: Classify the Update Type
 
@@ -138,6 +156,15 @@ Follow these principles:
 ### Step 5: Update the Index (if needed)
 
 If you added a new section or the code-spec status changed, update the category's `index.md`.
+
+### Step 6: Update User Docs (if needed)
+
+If the learning changes human-facing project context, update `.trellis/user/`:
+
+1. Read `.trellis/user/index.md` and the relevant package/context page.
+2. Add concise context in plain language: what changed, why it matters, where to look.
+3. Keep technical terms exact. Do not add agent checklists or duplicate spec tables.
+4. If no user doc update is needed, state that judgment explicitly.
 
 ---
 
@@ -325,6 +352,7 @@ Before finishing your code-spec update:
 - [ ] Did you include Good/Base/Bad cases?
 - [ ] Did you include required tests with assertion points?
 - [ ] Is it in the right code-spec file?
+- [ ] Did you decide whether `.trellis/user/` needs a human-facing update?
 - [ ] Does it duplicate existing content?
 - [ ] Would a new team member understand it?
 
@@ -341,8 +369,8 @@ Development Flow:
 ```
 
 - `$break-loop` - Analyzes bugs deeply, often reveals spec updates needed
-- `$update-spec` - Actually makes the updates
-- `$finish-work` - Reminds you to check if specs need updates
+- `$update-spec` - Actually makes the spec and user-doc updates
+- `$finish-work` - Reminds you to check if specs and user docs need updates
 
 ---
 
@@ -354,3 +382,4 @@ The goal is **institutional memory**:
 - What one person learns, everyone benefits from
 - What AI learns in one session, persists to future sessions
 - Mistakes become documented guardrails
+- What humans need to understand lives in `.trellis/user/`; what agents need to execute lives in `.trellis/spec/`

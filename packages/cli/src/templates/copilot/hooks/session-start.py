@@ -303,7 +303,9 @@ Read and follow all instructions below carefully.
         "`trellis-implement` and `trellis-check` (so JSONL context is loaded by "
         "the sub-agents) rather than editing code in the main session. "
         "Honor a per-turn user override only if the user's current message "
-        "explicitly opts out (see <task-status> below for override phrases).\n\n"
+        "explicitly opts out (see <task-status> below for override phrases).\n"
+        "- Human-facing project context lives in `.trellis/user/`; Phase 3.3 "
+        "requires deciding whether spec docs and user docs both need updates.\n\n"
     )
 
     # guides/ inlined (cross-package thinking, broadly useful)

@@ -273,7 +273,7 @@ def _get_task_status(trellis_dir: Path, input_data: dict) -> str:
         return (
             f"Status: COMPLETED\nTask: {task_title}\n"
             f"Source: {active.source}\n"
-            f"Next-Action: Load skill `trellis-update-spec` to capture learnings, "
+            f"Next-Action: Load skill `trellis-update-spec` to capture spec/user-doc learnings, "
             f"then archive with `python3 ./.trellis/scripts/task.py archive {task_dir.name}`."
         )
 
@@ -641,7 +641,9 @@ Read and follow all instructions below carefully.
         "`trellis-implement` and `trellis-check` (so JSONL context is loaded by "
         "the sub-agents) rather than editing code in the main session. "
         "Honor a per-turn user override only if the user's current message "
-        "explicitly opts out (see <task-status> below for override phrases).\n\n"
+        "explicitly opts out (see <task-status> below for override phrases).\n"
+        "- Human-facing project context lives in `.trellis/user/`; Phase 3.3 "
+        "requires deciding whether spec docs and user docs both need updates.\n\n"
     )
 
     # guides/ is cross-package thinking — always include inline (small, broadly useful)

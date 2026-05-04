@@ -1,6 +1,6 @@
 ---
 name: trellis-finish-work
-description: "Wrap up the current session: verify quality gate passed, remind user to commit, archive completed tasks, and record session progress to the developer journal. Use when done coding and ready to end the session."
+description: "Wrap up the current session: verify quality gate passed, ensure spec/user-doc sync was considered, remind user to commit, archive completed tasks, and record session progress to the developer journal. Use when done coding and ready to end the session."
 ---
 
 # Finish Work
@@ -36,6 +36,8 @@ If anything else is dirty (any path outside those two prefixes), **stop and bail
 > "Working tree has uncommitted code changes. Return to workflow Phase 3.4 to commit them before running `$finish-work`."
 
 Do NOT run `git commit` here. Do NOT prompt the user to commit. The user goes back to Phase 3.4 and the AI drives the batched commit there.
+
+Before continuing, verify Phase 3.3 already happened: the work should include an explicit judgment about whether `.trellis/spec/` and `.trellis/user/` needed updates. If that judgment is missing, stop and return to Phase 3.3 before archiving.
 
 ## Step 3: Archive task(s)
 

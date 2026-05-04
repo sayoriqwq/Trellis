@@ -177,9 +177,10 @@ ${originalPrompt}
 
 1. **Review changes** - Run \`git diff --name-only\` to see all changed files
 2. **Verify requirements** - Check each requirement in prd.md is implemented
-3. **Spec sync** - Analyze whether changes introduce new patterns, contracts, or conventions
+3. **Knowledge docs sync** - Analyze whether changes introduce new patterns, contracts, conventions, or human-facing project context changes
    - If new pattern/convention found: read target spec file → update it → update index.md if needed
    - If infra/cross-layer change: follow the 7-section mandatory template from update-spec.md
+   - If project map, architecture notes, reading order, or common pitfalls changed: update \`.trellis/user/\`
    - If pure code fix with no new patterns: skip this step
 4. **Run final checks** - Execute lint and typecheck
 5. **Confirm ready** - Ensure code is ready for PR
@@ -187,6 +188,7 @@ ${originalPrompt}
 ## Important Constraints
 
 - You MAY update spec files when gaps are detected (use update-spec.md as guide)
+- You MAY update \`.trellis/user/\` when human-facing project context is stale
 - MUST read the target spec file BEFORE editing (avoid duplicating existing content)
 - Do NOT update specs for trivial changes (typos, formatting, obvious fixes)
 - If critical CODE issues found, report them clearly (fix specs, not code)

@@ -1,6 +1,6 @@
 ---
 name: finish-work
-description: "Pre-commit quality checklist covering lint, typecheck, tests, code-spec sync, API changes, database migrations, cross-layer verification, and manual testing. Blocks commit if infra or cross-layer specs lack executable depth. Use when code is written and tested but not yet committed, before submitting changes, or as a final review before git commit."
+description: "Pre-commit quality checklist covering lint, typecheck, tests, code-spec sync, user-doc sync, API changes, database migrations, cross-layer verification, and manual testing. Blocks commit if infra or cross-layer specs lack executable depth. Use when code is written and tested but not yet committed, before submitting changes, or as a final review before git commit."
 ---
 
 # Finish Work - Pre-Commit Checklist
@@ -29,7 +29,7 @@ pnpm test
 - [ ] No non-null assertions (the `x!` operator)?
 - [ ] No `any` types?
 
-### 2. Code-Spec Sync
+### 2. Knowledge Docs Sync
 
 **Code-Spec Docs**:
 - [ ] Does `.trellis/spec/backend/` need updates?
@@ -38,11 +38,17 @@ pnpm test
   - New components, new hooks, new patterns
 - [ ] Does `.trellis/spec/guides/` need updates?
   - New cross-layer flows, lessons from bugs
+- [ ] Does `.trellis/user/` need updates?
+  - Project map, package roles, reading order, architecture context, common pitfalls
 
 **Key Question**: 
 > "If I fixed a bug or discovered something non-obvious, should I document it so future me (or others) won't hit the same issue?"
 
 If YES -> Update the relevant code-spec doc.
+
+> "If this changes how a human should understand or navigate the project, should `.trellis/user/` explain it?"
+
+If YES -> Update the relevant user doc.
 
 ### 2.5. Code-Spec Hard Block (Infra/Cross-Layer)
 
@@ -113,6 +119,7 @@ git diff --name-only
 | Oversight | Consequence | Check |
 |-----------|-------------|-------|
 | Code-spec docs not updated | Others don't know the change | Check .trellis/spec/ |
+| User docs not updated | Humans lose the project map/context | Check .trellis/user/ |
 | Spec text is abstract only | Easy regressions in infra/cross-layer changes | Require signature/contract/matrix/cases/tests |
 | Migration not created | Schema out of sync | Check db/migrations/ |
 | Types not synced | Runtime errors | Check shared types |

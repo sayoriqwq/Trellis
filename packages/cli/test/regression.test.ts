@@ -2629,7 +2629,7 @@ print(len(entries))
     expect(output).toContain("## Phase 2: Execute");
     expect(output).toContain("#### 2.1 Implement");
     expect(output).toContain("## Phase 3: Finish");
-    expect(output).toContain("#### 3.3 Spec update");
+    expect(output).toContain("#### 3.3 Knowledge docs update");
     // Stops at Workflow State Breadcrumbs (consumed by UserPromptSubmit hook)
     expect(output).not.toContain("## Workflow State Breadcrumbs");
   });
@@ -2796,7 +2796,7 @@ print(len(entries))
     expect(workflowBlock).toContain("## Phase 1: Plan");
     expect(workflowBlock).toContain("#### 1.1 Requirement exploration");
     expect(workflowBlock).toContain("#### 2.1 Implement");
-    expect(workflowBlock).toContain("#### 3.3 Spec update");
+    expect(workflowBlock).toContain("#### 3.3 Knowledge docs update");
     // Breadcrumb tag BLOCKS (matched opening + closing pair) excluded — they're
     // consumed by inject-workflow-state.py. Inline `[workflow-state:planning]`
     // mentions in narrative prose are fine; only complete blocks are stripped.

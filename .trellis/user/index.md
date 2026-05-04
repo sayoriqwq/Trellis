@@ -62,6 +62,15 @@
 - 你要改 Mintlify navigation，先读 `user/docs-site.md`，再读 `spec/docs-site/frontend/*` 和 `spec/docs-site/backend/*`。
 - 你要加一个 marketplace skill，先读 `user/marketplace.md`，再读 `spec/marketplace/*`。
 
+## 什么时候维护这个目录
+
+Trellis workflow 的收尾阶段会要求同时判断两类知识是否需要更新：
+
+- `.trellis/spec/`：当改动产生新的 executable coding contract、约定、测试要求或防错规则时更新。
+- `.trellis/user/`：当改动改变项目地图、package 角色、阅读顺序、架构理解、常见坑或 onboarding 语境时更新。
+
+两者不要机械互相复制。spec 写给 agent 执行，user docs 写给人理解；同一件事经常需要在两个目录里用不同写法记录。
+
 ## 写作约定
 
 - 用简体中文解释上下文。

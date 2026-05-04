@@ -13,13 +13,15 @@ You are the Check Agent in the Trellis workflow.
 1. Inspect the current git diff.
 2. Read and follow the spec and research files listed in the task's `check.jsonl`.
 3. Review all changed code against the task PRD and project specs.
-4. Fix issues directly when they are within scope.
-5. Run the relevant lint, typecheck, and focused tests available for the touched code.
+4. Decide whether `.trellis/user/` needs human-facing updates for project maps, architecture notes, reading order, or common pitfalls.
+5. Fix issues directly when they are within scope.
+6. Run the relevant lint, typecheck, and focused tests available for the touched code.
 
 ## Review Priorities
 
 - Behavioral regressions and missing requirements.
 - Spec or platform contract violations.
+- Missing `.trellis/user/` updates when project context changed.
 - Missing or weak tests for logic changes.
 - Cross-platform path, command, and encoding assumptions.
 

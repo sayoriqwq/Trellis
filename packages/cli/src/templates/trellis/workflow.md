@@ -8,7 +8,7 @@
 2. **Specs injected, not remembered** — guidelines are injected via hook/skill, not recalled from memory
 3. **Persist everything** — research, decisions, and lessons all go to files; conversations get compacted, files don't
 4. **Incremental development** — one task at a time
-5. **Capture learnings** — after each task, review and write new knowledge back to spec
+5. **Capture learnings** — after each task, review and write new knowledge back to spec and user docs
 
 ---
 
@@ -36,6 +36,15 @@ python3 ./.trellis/scripts/get_context.py --mode packages   # list packages / la
 ```
 
 **When to update spec**: new pattern/convention found · bug-fix prevention to codify · new technical decision.
+
+### User Docs System
+
+`.trellis/user/` holds human-facing project context docs. Treat it as the readable sibling of `.trellis/spec/`:
+
+- `.trellis/spec/` tells agents how to execute work safely.
+- `.trellis/user/` tells humans what the project is, where important code lives, how packages fit together, and what common mistakes to avoid.
+
+**When to update user docs**: package map changes · onboarding or reading-order changes · architecture/context changes · spec changes that humans need explained in plain language.
 
 ### Task System
 
@@ -144,7 +153,7 @@ python3 ./.trellis/scripts/get_context.py --mode phase --step <X.Y>  # detailed 
 ```
 Phase 1: Plan    → figure out what to do (brainstorm + research → prd.md)
 Phase 2: Execute → write code and pass quality checks
-Phase 3: Finish  → distill lessons + wrap-up
+Phase 3: Finish  → distill lessons + sync knowledge docs + wrap-up
 ```
 
 <!-- Per-turn breadcrumb: shown when there is no active task (before Phase 1) -->
@@ -181,18 +190,18 @@ Research output **must** land in `{task_dir}/research/*.md`, written by `trellis
      Scope: all of Phase 2 + Phase 3.1-3.4 (status stays 'in_progress' from
      task.py start until task.py archive; only archive flips it). The body
      therefore must cover every required step from implementation through
-     commit, including Phase 3.3 spec update and Phase 3.4 commit. -->
+     commit, including Phase 3.3 knowledge docs update and Phase 3.4 commit. -->
 
 [workflow-state:in_progress]
-**Flow**: trellis-implement → trellis-check → trellis-update-spec → commit (Phase 3.4) → `/trellis:finish-work`.
-**Default (no override)**: dispatch the `trellis-implement` / `trellis-check` sub-agents — the main agent does NOT edit code by default. Phase 3.4 commit (required, once): after trellis-update-spec, or whenever implementation is verifiably complete, the main agent **drives the commit** — state the commit plan in user-facing text, then run `git commit` — BEFORE suggesting `/trellis:finish-work`. `/finish-work` refuses to run on a dirty working tree (paths outside `.trellis/workspace/` and `.trellis/tasks/`).
+**Flow**: trellis-implement → trellis-check → trellis-update-spec + `.trellis/user/` sync review → commit (Phase 3.4) → `/trellis:finish-work`.
+**Default (no override)**: dispatch the `trellis-implement` / `trellis-check` sub-agents — the main agent does NOT edit code by default. Phase 3.3 knowledge docs update (required, once): after check passes, run trellis-update-spec and explicitly decide whether `.trellis/spec/` and `.trellis/user/` need updates. Phase 3.4 commit (required, once): after knowledge docs are reviewed, or whenever implementation is verifiably complete, the main agent **drives the commit** — state the commit plan in user-facing text, then run `git commit` — BEFORE suggesting `/trellis:finish-work`. `/finish-work` refuses to run on a dirty working tree (paths outside `.trellis/workspace/` and `.trellis/tasks/`).
 **Inline override** (per-turn only, escape hatch for sub-agent dispatch): the user's CURRENT message MUST explicitly contain one of: "do it inline" / "no sub-agent" / "你直接改" / "别派 sub-agent" / "main session 写就行" / "不用 sub-agent". **Without seeing one of these phrases you must NOT inline on your own**; do not invent an override the user never said.
 [/workflow-state:in_progress]
 
 ### Phase 3: Finish
 - 3.1 Quality verification `[required · repeatable]`
 - 3.2 Debug retrospective `[on demand]`
-- 3.3 Spec update `[required · once]`
+- 3.3 Knowledge docs update `[required · once]`
 - 3.4 Commit changes `[required · once]`
 - 3.5 Wrap-up reminder
 
@@ -536,14 +545,17 @@ If this task involved repeated debugging (the same issue was fixed multiple time
 
 The goal is to capture debugging lessons so the same class of issue doesn't recur.
 
-#### 3.3 Spec update `[required · once]`
+#### 3.3 Knowledge docs update `[required · once]`
 
 Load the `trellis-update-spec` skill and review whether this task produced new knowledge worth recording:
 - Newly discovered patterns or conventions
 - Pitfalls you hit
 - New technical decisions
+- Human-facing project context or navigation changes
 
-Update the docs under `.trellis/spec/` accordingly. Even if the conclusion is "nothing to update", walk through the judgment.
+Update `.trellis/spec/` when the change affects executable coding contracts. Update `.trellis/user/` when the change affects human-facing project context, package maps, reading order, architecture explanations, or common pitfalls.
+
+Even if the conclusion is "nothing to update", walk through both judgments: `.trellis/spec/` and `.trellis/user/`.
 
 #### 3.4 Commit changes `[required · once]`
 

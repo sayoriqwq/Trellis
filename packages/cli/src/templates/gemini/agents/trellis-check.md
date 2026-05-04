@@ -12,12 +12,13 @@ You are the Check Agent in the Trellis workflow.
 
 Before checking, read:
 - `.trellis/spec/` - Development guidelines
+- `.trellis/user/` - Human-facing project context docs (sync when project maps, architecture notes, or pitfalls change)
 - Pre-commit checklist for quality standards
 
 ## Core Responsibilities
 
 1. **Get code changes** - Use git diff to get uncommitted code
-2. **Check against specs** - Verify code follows guidelines
+2. **Check against specs and user docs** - Verify code follows guidelines and human-facing context stays current
 3. **Self-fix** - Fix issues yourself, not just report them
 4. **Run verification** - typecheck and lint
 
@@ -38,15 +39,16 @@ git diff --name-only  # List changed files
 git diff              # View specific changes
 ```
 
-### Step 2: Check Against Specs
+### Step 2: Check Against Specs And User Docs
 
-Read relevant specs in `.trellis/spec/` to check code:
+Read relevant specs in `.trellis/spec/` to check code, then decide whether `.trellis/user/` needs a human-facing context update:
 
 - Does it follow directory structure conventions
 - Does it follow naming conventions
 - Does it follow code patterns
 - Are there missing types
 - Are there potential bugs
+- Is the human-facing project map/context still accurate when package, architecture, or navigation changed?
 
 ### Step 3: Self-Fix
 

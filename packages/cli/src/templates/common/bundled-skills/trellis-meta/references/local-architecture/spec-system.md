@@ -85,7 +85,7 @@ Specs should contain executable engineering conventions for the project, not gen
 - Cases that require tests.
 - Project-specific pitfalls and how to avoid them.
 
-When the AI learns a new rule during implementation or debugging, it should update `.trellis/spec/` rather than only summarizing it in chat.
+When the AI learns a new executable rule during implementation or debugging, it should update `.trellis/spec/` rather than only summarizing it in chat. If the learning changes how a human should understand or navigate the project, it should also update `.trellis/user/`.
 
 ## Local Customization Points
 
@@ -95,7 +95,7 @@ When the AI learns a new rule during implementation or debugging, it should upda
 | Change monorepo spec mapping | `packages` / `default_package` / `spec_scope` in `.trellis/config.yaml`. |
 | Change which specs AI reads before implementation | The task's `implement.jsonl`. |
 | Change which specs AI reads during checking | The task's `check.jsonl`. |
-| Change when specs should be updated | Phase 3.3 in `.trellis/workflow.md` and the `trellis-update-spec` skill. |
+| Change when specs or user docs should be updated | Phase 3.3 in `.trellis/workflow.md`, the `[workflow-state:in_progress]` block, and the `trellis-update-spec` skill. |
 
 ## Boundaries
 

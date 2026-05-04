@@ -16,6 +16,7 @@ This page only describes files that are visible and editable inside the user pro
 ├── .runtime/
 ├── scripts/
 ├── spec/
+├── user/
 ├── tasks/
 └── workspace/
 ```
@@ -25,6 +26,7 @@ This page only describes files that are visible and editable inside the user pro
 | `.trellis/workflow.md` | Yes | Local workflow documentation and AI routing rules. |
 | `.trellis/config.yaml` | Yes | Project configuration, hooks, packages, journal line limits, and related settings. |
 | `.trellis/spec/` | Yes | Project specs, intended to be updated regularly by users and AI. |
+| `.trellis/user/` | Yes | Human-facing project context docs, intended to be updated when package maps, reading order, architecture notes, or common pitfalls change. |
 | `.trellis/tasks/` | Yes | Task material and research artifacts, maintained by the task workflow. |
 | `.trellis/workspace/` | Yes | Session records, usually written by `add_session.py`. |
 | `.trellis/scripts/` | Carefully | Local runtime. It can be customized, but only after understanding the call chain. |
@@ -66,6 +68,7 @@ Editable by default:
 - `.trellis/workflow.md`
 - `.trellis/config.yaml`
 - `.trellis/spec/**`
+- `.trellis/user/**`
 - `.trellis/scripts/**`
 - Platform hooks, settings, agents, skills, commands, prompts, and workflows
 

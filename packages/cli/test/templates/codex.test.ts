@@ -33,6 +33,24 @@ describe("codex shared skills (from common source)", () => {
       expect(skill.content).not.toContain(".cursor/");
     }
   });
+
+  it("reminds agents to keep user docs in sync", () => {
+    const skills = resolveAllAsSkills(AI_TOOLS.codex.templateContext);
+    const updateSpec = skills.find(
+      (skill) => skill.name === "trellis-update-spec",
+    );
+    const check = skills.find((skill) => skill.name === "trellis-check");
+    const finishWork = skills.find(
+      (skill) => skill.name === "trellis-finish-work",
+    );
+
+    expect(updateSpec?.content).toContain(".trellis/user/");
+    expect(updateSpec?.content).toContain("When to Update User Docs");
+    expect(check?.content).toContain("Does `.trellis/user/` need updates?");
+    expect(finishWork?.content).toContain(
+      "whether `.trellis/spec/` and `.trellis/user/` needed updates",
+    );
+  });
 });
 
 describe("codex getAllAgents", () => {
@@ -49,6 +67,14 @@ describe("codex getAllAgents", () => {
       expect(agent.content).toContain("description = ");
       expect(agent.content).toContain("developer_instructions = ");
     }
+  });
+
+  it("check agent reviews user-doc sync", () => {
+    const checkAgent = getAllAgents().find(
+      (agent) => agent.name === "trellis-check",
+    );
+    expect(checkAgent?.content).toContain(".trellis/user/");
+    expect(checkAgent?.content).toContain("docs need sync");
   });
 });
 

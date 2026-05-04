@@ -7,6 +7,7 @@
 这个 CLI 的职责不是运行一个 server，也不是渲染 UI，而是把 Trellis 工作流安装、更新、卸载到用户项目里。它管理的内容包括：
 
 - `.trellis/` workflow、tasks、spec、workspace、scripts。
+- `.trellis/user/` 中面向 human 的项目地图、阅读顺序和架构说明。
 - 各 AI platform 的配置目录，例如 `.claude/`、`.codex/`、`.cursor/`、`.agents/skills/`。
 - templates、hooks、commands、skills、agents 的生成逻辑。
 - update/uninstall 时的 migration、hash manifest 和用户改动保护。
@@ -49,6 +50,10 @@ Trellis 自己也使用 `.trellis/`、`.codex/`、`.agents/` 等目录，但这�
 第三类是破坏非交互环境。
 
 CLI 会在 CI、pipe、agent 环境中运行。像 `file-writer.ts` 这样的底层工具已经处理了 non-TTY fallback。新增 prompt 时要确认不会在 non-TTY 下卡住或崩溃。
+
+第四类是只更新 agent-facing spec，忘了同步 human-facing user docs。
+
+现在 Trellis workflow 把 Phase 3.3 定义为 knowledge docs update：实现结束后要同时判断 `.trellis/spec/` 和 `.trellis/user/` 是否需要更新。前者记录可执行的 coding contract，后者解释项目地图、package 职责、阅读顺序、架构背景和常见坑。涉及 workflow、template、hook、platform adapter、package map 的改动尤其容易同时影响两者。
 
 ## 质量基线
 

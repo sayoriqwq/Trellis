@@ -38,6 +38,9 @@ Examples:
 - Keep each change tied to a command, configurator, utility, template, or test.
 - If a generated template changes, check tests that assert installed files and
   template hashes.
+- If workflow or knowledge-capture templates change, check both `.trellis/spec/`
+  and `.trellis/user/` docs for sync: spec captures executable agent rules,
+  user docs explain project context for humans.
 - If a path constant changes, search for the literal and update tests,
   templates, migrations, and docs as needed.
 - For platform support, update the platform configurator, template collection,

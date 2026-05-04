@@ -76,6 +76,15 @@ describe("trellis template constants", () => {
     expect(workflowMdTemplate).toContain("#");
   });
 
+  it("workflowMdTemplate treats user docs as maintained knowledge docs", () => {
+    expect(workflowMdTemplate).toContain("### User Docs System");
+    expect(workflowMdTemplate).toContain("`.trellis/user/`");
+    expect(workflowMdTemplate).toContain("3.3 Knowledge docs update");
+    expect(workflowMdTemplate).toContain(
+      "walk through both judgments: `.trellis/spec/` and `.trellis/user/`",
+    );
+  });
+
   it("gitignoreTemplate contains ignore patterns", () => {
     expect(gitignoreTemplate).toContain(".developer");
     expect(gitignoreTemplate).toContain("__pycache__");

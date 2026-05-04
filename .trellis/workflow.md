@@ -94,7 +94,8 @@ cat .trellis/spec/<package>/<layer>/conventions.md
 2. **Follow Standards** - [!] **MUST read `.trellis/spec/` guidelines before coding**
 3. **Incremental Development** - Complete one task at a time
 4. **Record Promptly** - Update tracking files immediately after completion
-5. **Document Limits** - [!] **Max 2000 lines per journal document**
+5. **Keep Knowledge Current** - update `.trellis/spec/` for agent-facing rules and `.trellis/user/` for human-facing project context
+6. **Document Limits** - [!] **Max 2000 lines per journal document**
 
 ### File System
 
@@ -138,6 +139,9 @@ cat .trellis/spec/<package>/<layer>/conventions.md
 |       |-- index.md                      # Guides index
 |       |-- cross-layer-thinking-guide.md # Pre-implementation checklist
 |       +-- *.md                          # Other guides
+|-- user/                # Human-facing project context docs
+|   |-- index.md         # Project map, reading order, context overview
+|   +-- *.md             # Package/context pages for humans
 +-- workflow.md             # This document
 ```
 
@@ -208,15 +212,19 @@ python3 ./.trellis/scripts/task.py create "<title>" --slug <task-name>
    --> Run project's lint/test commands (see spec docs)
    --> Manual feature testing
 
-5. Commit code
+5. Update knowledge docs
+   --> Update .trellis/spec/ when executable coding contracts changed
+   --> Update .trellis/user/ when project map, architecture context, reading order, or common pitfalls changed
+
+6. Commit code
    --> git add <files>
    --> git commit -m "type(scope): description"
        Format: feat/fix/docs/refactor/test/chore
 
-6. Record session (one command)
+7. Record session (one command)
    --> python3 ./.trellis/scripts/add_session.py --title "Title" --commit "hash"
 
-7. Finish task (clear current)
+8. Finish task (clear current)
    --> python3 ./.trellis/scripts/task.py finish
    --> Only when the task is fully done; otherwise leave it set so the
        next session resumes where you left off
@@ -352,6 +360,7 @@ python3 ./.trellis/scripts/task.py list-archive    # List archived tasks
 3. **After development complete**:
    - Use `/trellis:finish-work` for completion checklist
    - After fix bug, use `/trellis:break-loop` for deep analysis
+   - Update `.trellis/spec/` for executable rules and `.trellis/user/` for human-readable project context when needed
    - Human commits after testing passes
    - Use `add_session.py` to record progress
 
@@ -361,7 +370,7 @@ python3 ./.trellis/scripts/task.py list-archive    # List archived tasks
 2. [!] **Don't** let journal single file exceed 2000 lines
 3. **Don't** develop multiple unrelated tasks simultaneously
 4. **Don't** commit code with lint/test errors
-5. **Don't** forget to update spec docs after learning something
+5. **Don't** forget to update spec docs or user docs after learning something
 6. [!] **Don't** execute `git commit` - AI should not commit code
 
 ---
@@ -413,4 +422,4 @@ Following this workflow ensures:
 - [OK] Knowledge accumulation in spec docs
 - [OK] Transparent team collaboration
 
-**Core Philosophy**: Read before write, follow standards, record promptly, capture learnings
+**Core Philosophy**: Read before write, follow standards, record promptly, capture learnings in spec and user docs

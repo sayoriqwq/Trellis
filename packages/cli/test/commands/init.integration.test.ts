@@ -92,6 +92,15 @@ describe("init() integration", () => {
 
     // Root files
     expect(fs.existsSync(path.join(tmpDir, "AGENTS.md"))).toBe(true);
+    expect(fs.readFileSync(path.join(tmpDir, "AGENTS.md"), "utf-8")).toContain(
+      ".trellis/user/",
+    );
+    expect(
+      fs.readFileSync(path.join(tmpDir, PATHS.WORKFLOW_GUIDE_FILE), "utf-8"),
+    ).toContain("3.3 Knowledge docs update");
+    expect(
+      fs.readFileSync(path.join(tmpDir, PATHS.USER, "index.md"), "utf-8"),
+    ).toContain("两者应该同步维护");
 
     // Built-in multi-file skill is installed for default platforms.
     expect(

@@ -11,6 +11,7 @@ Use the `/trellis:start` command when starting a new session to:
 Use `@/.trellis/` to learn:
 - Development workflow (`workflow.md`)
 - Project structure guidelines (`spec/`)
+- Human-facing project context docs (`user/`)
 - Developer workspace (`workspace/`)
 
 If you're using Codex, project-scoped helpers may also live in:

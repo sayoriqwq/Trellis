@@ -1,6 +1,6 @@
 ---
 name: trellis-check
-description: "Comprehensive quality verification: spec compliance, lint, type-check, tests, cross-layer data flow, code reuse, and consistency checks. Use when code is written and needs quality verification, before committing changes, or to catch context drift during long sessions."
+description: "Comprehensive quality verification: spec compliance, user-doc sync, lint, type-check, tests, cross-layer data flow, code reuse, and consistency checks. Use when code is written and needs quality verification, before committing changes, or to catch context drift during long sessions."
 ---
 
 # Code Quality Check
@@ -50,11 +50,13 @@ Run the project's lint, type-check, and test commands. Fix any failures before p
 - [ ] Bug fix → regression test added?
 - [ ] Changed behavior → existing tests updated?
 
-### Spec Sync
+### Knowledge Docs Sync
 
 - [ ] Does `.trellis/spec/` need updates? (new patterns, conventions, lessons learned)
+- [ ] Does `.trellis/user/` need updates? (project map, package roles, reading order, architecture/context notes, common pitfalls)
 
 > "If I fixed a bug or discovered something non-obvious, should I document it so future me won't hit the same issue?" → If YES, update the relevant spec doc.
+> "If this changes how a human should understand or navigate the project, should `.trellis/user/` explain it?" → If YES, update the relevant user doc.
 
 ## Step 5: Cross-Layer Dimensions (if applicable)
 

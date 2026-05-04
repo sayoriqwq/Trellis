@@ -9,7 +9,7 @@ This skill is for local Trellis users who have already run `trellis init` in a p
 
 The default operating scope is local files in the user project:
 
-- `.trellis/`: workflow, config, tasks, spec, workspace, scripts, and runtime state.
+- `.trellis/`: workflow, config, tasks, spec, user docs, workspace, scripts, and runtime state.
 - Platform directories: `.claude/`, `.codex/`, `.cursor/`, `.opencode/`, `.kiro/`, `.gemini/`, `.qoder/`, `.codebuddy/`, `.github/`, `.factory/`, `.pi/`, `.kilocode/`, `.agent/`, `.windsurf/`, and similar directories.
 - Shared skill layer: `.agents/skills/`.
 
@@ -59,6 +59,7 @@ Do not assume the user has the Trellis source repository. Do not default to modi
 - `.trellis/workflow.md` is the local workflow source of truth.
 - `.trellis/config.yaml` is the project-level Trellis configuration and task hook configuration entry point.
 - `.trellis/spec/` stores the user's project-specific coding conventions and design constraints.
+- `.trellis/user/` stores human-facing project context docs such as package maps, reading order, architecture notes, and common pitfalls.
 - `.trellis/tasks/` stores task PRDs, technical notes, research files, and JSONL context.
 - `.trellis/workspace/` stores developer journals and cross-session memory.
 - Platform settings/config files decide which hooks, agents, skills, commands, prompts, and workflows actually run.

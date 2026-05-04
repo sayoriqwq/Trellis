@@ -17,6 +17,7 @@ command contract says so.
 - `.trellis/.template-hashes.json`: source of truth for generated managed files.
 - `.trellis/config.yaml`: package/workflow configuration.
 - `.trellis/tasks/**`: task metadata, PRDs, and JSONL context files.
+- `.trellis/user/**`: human-facing project context docs.
 - `.trellis/workspace/**`: developer journals and indexes.
 - Platform directories such as `.claude/`, `.codex/`, `.cursor/`,
   `.agents/skills/`, and `.github/copilot/`.
@@ -41,7 +42,7 @@ template output. It handles new files, identical content, `force`, `skip`,
 
 `packages/cli/src/commands/update.ts` defines `PROTECTED_PATHS` so update never
 touches user-owned `.trellis/workspace`, `.trellis/tasks`, `.trellis/spec`,
-`.trellis/.developer`, or `.trellis/.current-task`.
+`.trellis/user`, `.trellis/.developer`, or `.trellis/.current-task`.
 
 `packages/cli/src/utils/project-detector.ts` reads package metadata defensively:
 missing or malformed `package.json`, `Cargo.toml`, `go.mod`, or `pyproject.toml`

@@ -1,6 +1,6 @@
 ---
 name: finish-work
-description: "Wrap up an active Trellis task: archive it (and any other completed-but-unarchived tasks the user wants to clean up) and record a session journal. Refuses to run if the working tree has uncommitted code changes (those belong in workflow Phase 3.4 first). Use when the user asks to finish / wrap up / call it a day, or invokes $finish-work."
+description: "Wrap up an active Trellis task: verify spec/user-doc sync was considered, archive it (and any other completed-but-unarchived tasks the user wants to clean up), and record a session journal. Refuses to run if the working tree has uncommitted code changes (those belong in workflow Phase 3.4 first). Use when the user asks to finish / wrap up / call it a day, or invokes $finish-work."
 ---
 
 # Finish Work
@@ -36,6 +36,8 @@ If anything else is dirty (any path outside those two prefixes), **stop and bail
 > "Working tree has uncommitted code changes. Return to workflow Phase 3.4 to commit them before running `$finish-work`."
 
 Do NOT run `git commit` here. Do NOT prompt the user to commit. The user goes back to Phase 3.4 and the AI drives the batched commit there.
+
+Before continuing, verify Phase 3.3 already happened: the work should include an explicit judgment about whether `.trellis/spec/` and `.trellis/user/` needed updates. If that judgment is missing, stop and return to Phase 3.3 before archiving.
 
 ## Step 3: Archive task(s)
 

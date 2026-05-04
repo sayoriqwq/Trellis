@@ -65,15 +65,20 @@ function writeHashesV2(hashFile: string, hashes: Record<string, string>): void {
 }
 
 function removeSubagentsSection(content: string): string {
-  return content.replace(
-    "\n## Subagents\n\n" +
-      "- ALWAYS wait for all subagents to complete before yielding.\n" +
-      "- Spawn subagents automatically when:\n" +
-      "  - Parallelizable work (e.g., install + verify, npm test + typecheck, multiple tasks from plan)\n" +
-      "  - Long-running or blocking tasks where a worker can run independently.\n" +
-      "  - Isolation for risky changes or checks\n",
-    "",
-  );
+  return content
+    .replace(
+      "\n## Subagents\n\n" +
+        "- ALWAYS wait for all subagents to complete before yielding.\n" +
+        "- Spawn subagents automatically when:\n" +
+        "  - Parallelizable work (e.g., install + verify, npm test + typecheck, multiple tasks from plan)\n" +
+        "  - Long-running or blocking tasks where a worker can run independently.\n" +
+        "  - Isolation for risky changes or checks\n",
+      "",
+    )
+    .replace(
+      "- `.trellis/user/` — human-facing project context docs (project map, reading order, architecture notes)\n",
+      "",
+    );
 }
 
 describe("update() integration", () => {

@@ -15,7 +15,7 @@
 ```text
 Phase 1: Plan    -> clarify what to build, produce prd.md and required research
 Phase 2: Execute -> implement against the PRD and specs, then check
-Phase 3: Finish  -> final verification, preserve lessons, and wrap up
+Phase 3: Finish  -> final verification, preserve lessons in spec/user docs, and wrap up
 ```
 
 Each phase contains numbered steps, such as `1.3 Configure context`. These numbers are not runtime fields in `task.json`; they are workflow structure for AI and humans to read.
@@ -60,6 +60,7 @@ Common changes:
 | Change task creation policy | Update the `no_task` state block and Phase 1 description. |
 | Change the default implementation/check path | Update Phase 2 and skill routing. |
 | Change the wrap-up flow | Update Phase 3 and `finish-work` related descriptions. Note the current split: Phase 3.4 = AI-driven code commits (batched, user-confirmed), Phase 3.5 = `/finish-work` (archive + record session). `/finish-work` refuses to run if the working tree is dirty. |
+| Change when `.trellis/user/` is maintained | Update Phase 3.3, the `[workflow-state:in_progress]` block, and `trellis-update-spec` / check / finish-work guidance. |
 | Change platform differences | Update routing descriptions grouped by platform. |
 
 After editing, make the AI reread `.trellis/workflow.md`; do not assume the flow from the old conversation is still valid.

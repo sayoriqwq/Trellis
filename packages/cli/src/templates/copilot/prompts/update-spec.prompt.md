@@ -1,10 +1,10 @@
 ---
-description: "Trellis Copilot prompt: Update Code-Spec - Capture Executable Contracts"
+description: "Trellis Copilot prompt: Update Knowledge Docs - Capture Executable Contracts And User Context"
 ---
 
-# Update Code-Spec - Capture Executable Contracts
+# Update Knowledge Docs - Capture Executable Contracts And User Context
 
-When you learn something valuable (from debugging, implementing, or discussion), use this command to update the relevant code-spec documents.
+When you learn something valuable (from debugging, implementing, or discussion), use this command to update the relevant code-spec documents and the human-facing project context docs.
 
 **Timing**: After completing a task, fixing a bug, or discovering a new pattern
 
@@ -54,9 +54,13 @@ For triggered tasks, include all sections below:
 
 **Key Insight**: Code-spec updates are NOT just for problems. Every feature implementation contains design decisions and contracts that future AI/developers need to execute safely.
 
+## When to Update User Docs
+
+`.trellis/user/` is the human-facing sibling of `.trellis/spec/`. Update it when the work changes how a developer should understand or navigate the project: package map, architecture context, reading order, human-facing pitfalls, or important spec context. Do not mirror every spec mechanically; explain the project map, why the rule matters, where code lives, and what a human should read next.
+
 ---
 
-## Spec Structure Overview
+## Knowledge Structure Overview
 
 ```
 .trellis/spec/
@@ -70,6 +74,9 @@ For triggered tasks, include all sections below:
     ├── index.md       # Guide index
     └── *.md           # Topic-specific guides
 ```
+
+`.trellis/user/` contains `index.md` plus human-facing package/context pages.
+
 
 ### CRITICAL: Code-Spec vs Guide - Know the Difference
 
@@ -102,7 +109,7 @@ Answer these questions:
 
 1. **What did you learn?** (Be specific)
 2. **Why is it important?** (What problem does it prevent?)
-3. **Where does it belong?** (Which spec file?)
+3. **Where does it belong?** (Which spec file, user doc, or both?)
 
 ### Step 2: Classify the Update Type
 
@@ -140,6 +147,10 @@ Follow these principles:
 ### Step 5: Update the Index (if needed)
 
 If you added a new section or the code-spec status changed, update the category's `index.md`.
+
+### Step 6: Update User Docs (if needed)
+
+If the learning changes human-facing project context, read `.trellis/user/index.md` and the relevant package/context page, then add concise context in plain language. If no user doc update is needed, state that judgment explicitly.
 
 ---
 
@@ -327,6 +338,7 @@ Before finishing your code-spec update:
 - [ ] Did you include Good/Base/Bad cases?
 - [ ] Did you include required tests with assertion points?
 - [ ] Is it in the right code-spec file?
+- [ ] Did you decide whether `.trellis/user/` needs a human-facing update?
 - [ ] Does it duplicate existing content?
 - [ ] Would a new team member understand it?
 
@@ -344,7 +356,7 @@ Development Flow:
 
 - `/` - Analyzes bugs deeply, often reveals spec updates needed
 - `/` - Actually makes the updates (this command)
-- `/` - Reminds you to check if specs need updates
+- `/` - Reminds you to check if specs and user docs need updates
 
 ---
 
@@ -353,6 +365,7 @@ Development Flow:
 > **Code-specs are living documents. Every debugging session, every "aha moment" is an opportunity to make the implementation contract clearer.**
 
 The goal is **institutional memory**:
+- What humans need to understand lives in `.trellis/user/`; what agents need to execute lives in `.trellis/spec/`
 - What one person learns, everyone benefits from
 - What AI learns in one session, persists to future sessions
 - Mistakes become documented guardrails
