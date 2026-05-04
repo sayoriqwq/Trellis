@@ -1,0 +1,64 @@
+{
+  "id": "trellis-core-learning-doc",
+  "name": "trellis-core-learning-doc",
+  "title": "brainstorm: Trellis 核心模块中文学习文档",
+  "description": "生成面向 TypeScript/前端背景开发者的 Trellis 核心模块中文学习文档，覆盖架构、核心逻辑链、关键模块代码分析和习题。",
+  "status": "planning",
+  "dev_type": "docs",
+  "scope": "learning-doc",
+  "package": "trellis",
+  "priority": "P2",
+  "creator": "sayoriqwq",
+  "assignee": "sayoriqwq",
+  "createdAt": "2026-05-04",
+  "completedAt": null,
+  "branch": null,
+  "base_branch": "main",
+  "worktree_path": null,
+  "current_phase": 0,
+  "next_action": [
+    {
+      "phase": 1,
+      "action": "brainstorm"
+    },
+    {
+      "phase": 2,
+      "action": "research"
+    },
+    {
+      "phase": 3,
+      "action": "implement"
+    },
+    {
+      "phase": 4,
+      "action": "check"
+    },
+    {
+      "phase": 5,
+      "action": "update-spec"
+    },
+    {
+      "phase": 6,
+      "action": "record-session"
+    }
+  ],
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": null,
+  "relatedFiles": [
+    "README.md",
+    "packages/cli/package.json",
+    "packages/cli/src/cli/index.ts",
+    "packages/cli/src/commands/init.ts",
+    "packages/cli/src/commands/update.ts",
+    "packages/cli/src/configurators/",
+    "packages/cli/src/templates/",
+    "packages/cli/src/utils/",
+    "packages/cli/src/templates/shared-hooks/",
+    "packages/cli/src/templates/trellis/scripts/"
+  ],
+  "notes": "Docs-only learning task. Shell examples for the user should be fish-compatible.",
+  "meta": {}
+}
