@@ -33,6 +33,9 @@ export const workspaceIndexContent: string =
 // Backwards compatibility alias
 export const agentProgressIndexContent = workspaceIndexContent;
 
+// User-facing project context docs
+export const userIndexContent: string = readLocalTemplate("user-index.md");
+
 // Gitignore (template file - .gitignore is ignored by npm)
 export const workflowGitignoreContent: string =
   readLocalTemplate("gitignore.txt");

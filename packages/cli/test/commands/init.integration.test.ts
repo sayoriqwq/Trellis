@@ -70,6 +70,8 @@ describe("init() integration", () => {
     expect(fs.existsSync(path.join(tmpDir, PATHS.WORKSPACE))).toBe(true);
     expect(fs.existsSync(path.join(tmpDir, PATHS.TASKS))).toBe(true);
     expect(fs.existsSync(path.join(tmpDir, PATHS.SPEC))).toBe(true);
+    expect(fs.existsSync(path.join(tmpDir, PATHS.USER))).toBe(true);
+    expect(fs.existsSync(path.join(tmpDir, PATHS.USER, "index.md"))).toBe(true);
 
     // Default platforms: cursor + claude
     expect(fs.existsSync(path.join(tmpDir, ".cursor"))).toBe(true);
@@ -819,9 +821,10 @@ describe("init() integration", () => {
     expect(taskJson.current_phase).toBeUndefined();
     expect(taskJson.next_action).toBeUndefined();
 
-    // relatedFiles point to spec/<name>/
+    // relatedFiles point to spec/<name>/ plus user-facing context docs
     expect(taskJson.relatedFiles).toContain(".trellis/spec/core/");
     expect(taskJson.relatedFiles).toContain(".trellis/spec/ui/");
+    expect(taskJson.relatedFiles).toContain(".trellis/user/");
 
     // prd.md mentions packages + renders per-package checklist items
     const prd = fs.readFileSync(path.join(taskDir, "prd.md"), "utf-8");
@@ -830,8 +833,13 @@ describe("init() integration", () => {
     expect(prd).toContain("core");
     expect(prd).toContain("ui");
     expect(prd).toContain("spec/");
+    expect(prd).toContain(".trellis/user/");
+    expect(prd).toContain("Simplified Chinese");
     expect(prd).toContain("- [ ] Fill guidelines for core");
     expect(prd).toContain("- [ ] Fill guidelines for ui");
+    expect(prd).toContain(
+      "- [ ] Write user-facing context docs in .trellis/user/",
+    );
     expect(prd).toContain(
       `${expectedPythonCmd} ./.trellis/scripts/task.py finish`,
     );

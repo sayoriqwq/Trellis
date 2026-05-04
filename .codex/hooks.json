@@ -11,17 +11,6 @@
           }
         ]
       }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 .codex/hooks/inject-workflow-state.py",
-            "timeout": 5
-          }
-        ]
-      }
     ]
   }
 }

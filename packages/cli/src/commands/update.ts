@@ -90,11 +90,12 @@ const LEGACY_UNTRACKED_AGENTS_MD_BLOCK_HASHES = new Set<string>([
 ]);
 
 // Paths that should never be touched (true user data)
-// spec/ is user-customized content created during init; update should never modify it
+// spec/ and user/ are user-customized content created during init; update should never modify them
 const PROTECTED_PATHS = [
   `${DIR_NAMES.WORKFLOW}/${DIR_NAMES.WORKSPACE}`, // workspace/
   `${DIR_NAMES.WORKFLOW}/${DIR_NAMES.TASKS}`, // tasks/
   `${DIR_NAMES.WORKFLOW}/${DIR_NAMES.SPEC}`, // spec/
+  `${DIR_NAMES.WORKFLOW}/${DIR_NAMES.USER}`, // user/
   `${DIR_NAMES.WORKFLOW}/.developer`,
   `${DIR_NAMES.WORKFLOW}/.current-task`,
 ];
@@ -947,6 +948,7 @@ const BACKUP_EXCLUDE_PATTERNS = [
   "/workspace/", // Developer workspace (user data)
   "/tasks/", // Task data (user data)
   "/spec/", // Spec files (user-customized content)
+  "/user/", // User-facing project context docs (user-customized content)
   "/backlog/", // Backlog data (user data)
   "/agent-traces/", // Agent traces (user data, legacy name)
   // Platform-native worktree dirs — these are full sub-repos the CLI

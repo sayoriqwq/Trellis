@@ -96,11 +96,7 @@ describe("init() joiner onboarding", () => {
   it("#1 empty cwd + init → creator bootstrap task created", async () => {
     await init({ yes: true, user: "alice" });
 
-    const bootstrap = path.join(
-      tmpDir,
-      PATHS.TASKS,
-      "00-bootstrap-guidelines",
-    );
+    const bootstrap = path.join(tmpDir, PATHS.TASKS, "00-bootstrap-guidelines");
     expect(fs.existsSync(bootstrap)).toBe(true);
 
     // No joiner task present
@@ -136,14 +132,18 @@ describe("init() joiner onboarding", () => {
     expect(prd).toContain("You (the AI) are running this task");
     expect(prd).toContain("workflow.md");
     expect(prd).toContain(".trellis/spec/");
+    expect(prd).toContain(".trellis/user/");
     expect(prd).toContain("00-join-bob");
     // Fallback text for empty archive
     expect(prd).toContain("archive is empty");
-    const expectedPythonCmd = process.platform === "win32" ? "python" : "python3";
+    const expectedPythonCmd =
+      process.platform === "win32" ? "python" : "python3";
     expect(prd).toContain(
       `${expectedPythonCmd} ./.trellis/scripts/task.py list --assignee bob`,
     );
-    expect(prd).toContain(`${expectedPythonCmd} ./.trellis/scripts/task.py finish`);
+    expect(prd).toContain(
+      `${expectedPythonCmd} ./.trellis/scripts/task.py finish`,
+    );
     expect(prd).toContain(
       `${expectedPythonCmd} ./.trellis/scripts/task.py archive 00-join-bob`,
     );
@@ -175,9 +175,9 @@ describe("init() joiner onboarding", () => {
     expect(
       fs.existsSync(path.join(tmpDir, PATHS.TASKS, "00-bootstrap-guidelines")),
     ).toBe(true);
-    expect(
-      fs.existsSync(path.join(tmpDir, PATHS.TASKS, "00-join-alice")),
-    ).toBe(false);
+    expect(fs.existsSync(path.join(tmpDir, PATHS.TASKS, "00-join-alice"))).toBe(
+      false,
+    );
   });
 
   it("#2c issue #204 with --force: empty tasks/ also triggers bootstrap fallback (not joiner)", async () => {
@@ -194,9 +194,9 @@ describe("init() joiner onboarding", () => {
     expect(
       fs.existsSync(path.join(tmpDir, PATHS.TASKS, "00-bootstrap-guidelines")),
     ).toBe(true);
-    expect(
-      fs.existsSync(path.join(tmpDir, PATHS.TASKS, "00-join-alice")),
-    ).toBe(false);
+    expect(fs.existsSync(path.join(tmpDir, PATHS.TASKS, "00-join-alice"))).toBe(
+      false,
+    );
   });
 
   it("#3 existing .trellis/ + .developer → no task created", async () => {
@@ -204,9 +204,9 @@ describe("init() joiner onboarding", () => {
 
     await init({ yes: true, user: "carol", force: true });
 
-    expect(
-      fs.existsSync(path.join(tmpDir, PATHS.TASKS, "00-join-carol")),
-    ).toBe(false);
+    expect(fs.existsSync(path.join(tmpDir, PATHS.TASKS, "00-join-carol"))).toBe(
+      false,
+    );
     expect(
       fs.existsSync(path.join(tmpDir, PATHS.TASKS, "00-bootstrap-guidelines")),
     ).toBe(false);
@@ -288,19 +288,17 @@ describe("init() joiner onboarding", () => {
     simulateExistingCheckout();
 
     const originalWriteFileSync = fs.writeFileSync;
-    const writeSpy = vi
-      .spyOn(fs, "writeFileSync")
-      .mockImplementation(((
-        filePath: fs.PathOrFileDescriptor,
-        data: string | NodeJS.ArrayBufferView,
-        options?: fs.WriteFileOptions,
-      ) => {
-        const pathStr = String(filePath);
-        if (pathStr.includes("00-join-eve") && pathStr.endsWith("task.json")) {
-          throw new Error("simulated write failure");
-        }
-        return originalWriteFileSync(filePath, data, options);
-      }) as typeof fs.writeFileSync);
+    const writeSpy = vi.spyOn(fs, "writeFileSync").mockImplementation(((
+      filePath: fs.PathOrFileDescriptor,
+      data: string | NodeJS.ArrayBufferView,
+      options?: fs.WriteFileOptions,
+    ) => {
+      const pathStr = String(filePath);
+      if (pathStr.includes("00-join-eve") && pathStr.endsWith("task.json")) {
+        throw new Error("simulated write failure");
+      }
+      return originalWriteFileSync(filePath, data, options);
+    }) as typeof fs.writeFileSync);
 
     const warnSpy = vi.spyOn(console, "warn");
 
@@ -351,9 +349,9 @@ describe("init() joiner onboarding", () => {
 
     await init({ yes: true, user: "grace" });
 
-    expect(
-      fs.existsSync(path.join(tmpDir, PATHS.TASKS, "00-join-grace")),
-    ).toBe(false);
+    expect(fs.existsSync(path.join(tmpDir, PATHS.TASKS, "00-join-grace"))).toBe(
+      false,
+    );
     expect(
       fs.existsSync(path.join(tmpDir, PATHS.TASKS, "00-bootstrap-guidelines")),
     ).toBe(false);

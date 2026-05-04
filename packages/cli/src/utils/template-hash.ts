@@ -278,6 +278,7 @@ const EXCLUDE_FROM_HASH = [
   "tasks/", // Task files (user data)
   ".current-task", // Current task marker (file, not directory)
   ".trellis/spec/", // User-customized spec files
+  ".trellis/user/", // User-facing project context docs
   ".backup-", // Backup directories
 ];
 

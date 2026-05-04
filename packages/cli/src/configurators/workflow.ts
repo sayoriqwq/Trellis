@@ -13,6 +13,7 @@ import {
 // Import markdown templates
 import {
   agentProgressIndexContent,
+  userIndexContent,
   // Backend structure (multi-doc)
   backendIndexContent,
   backendDirectoryStructureContent,
@@ -69,7 +70,8 @@ export interface WorkflowOptions {
  * 2. Copying workflow.md and .gitignore (dogfooding)
  * 3. Creating workspace/ with index.md
  * 4. Creating tasks/ directory
- * 5. Creating spec/ with templates (not dogfooded - generic templates)
+ * 5. Creating user/ with user-facing context docs
+ * 6. Creating spec/ with templates (not dogfooded - generic templates)
  *
  * @param cwd - Current working directory
  * @param options - Workflow options including project type
@@ -118,6 +120,10 @@ export async function createWorkflowStructure(
 
   // Create tasks/ directory
   ensureDir(path.join(cwd, PATHS.TASKS));
+
+  // Create user/ with user-facing project context docs
+  ensureDir(path.join(cwd, PATHS.USER));
+  await writeFile(path.join(cwd, PATHS.USER, "index.md"), userIndexContent);
 
   // Create spec templates based on project type
   // These are NOT dogfooded - they are generic templates for new projects

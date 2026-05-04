@@ -181,18 +181,28 @@ function getBootstrapChecklistItems(
 ): string[] {
   if (packages && packages.length > 0) {
     const items = packages.map((pkg) => `Fill guidelines for ${pkg.name}`);
+    items.push("Write user-facing context docs in .trellis/user/");
     items.push("Add code examples");
     return items;
   }
   if (projectType === "frontend") {
-    return ["Fill frontend guidelines", "Add code examples"];
+    return [
+      "Fill frontend guidelines",
+      "Write user-facing context docs in .trellis/user/",
+      "Add code examples",
+    ];
   }
   if (projectType === "backend") {
-    return ["Fill backend guidelines", "Add code examples"];
+    return [
+      "Fill backend guidelines",
+      "Write user-facing context docs in .trellis/user/",
+      "Add code examples",
+    ];
   }
   return [
     "Fill backend guidelines",
     "Fill frontend guidelines",
+    "Write user-facing context docs in .trellis/user/",
     "Add code examples",
   ];
 }
@@ -202,15 +212,22 @@ function getBootstrapRelatedFiles(
   packages?: DetectedPackage[],
 ): string[] {
   if (packages && packages.length > 0) {
-    return packages.map((pkg) => `.trellis/spec/${sanitizePkgName(pkg.name)}/`);
+    return [
+      ...packages.map((pkg) => `.trellis/spec/${sanitizePkgName(pkg.name)}/`),
+      `${PATHS.USER}/`,
+    ];
   }
   if (projectType === "frontend") {
-    return [".trellis/spec/frontend/"];
+    return [".trellis/spec/frontend/", `${PATHS.USER}/`];
   }
   if (projectType === "backend") {
-    return [".trellis/spec/backend/"];
+    return [".trellis/spec/backend/", `${PATHS.USER}/`];
   }
-  return [".trellis/spec/backend/", ".trellis/spec/frontend/"];
+  return [
+    ".trellis/spec/backend/",
+    ".trellis/spec/frontend/",
+    `${PATHS.USER}/`,
+  ];
 }
 
 function getBootstrapPrdContent(
@@ -232,11 +249,16 @@ The developer just ran \`trellis init\` on this project for the first time.
 exists under \`.trellis/tasks/\`. When they want to work on it, they should start
 this task from a session that provides Trellis session identity.
 
-**Your job**: help them populate \`.trellis/spec/\` with the team's real
-coding conventions. Every future AI session — this project's
-\`trellis-implement\` and \`trellis-check\` sub-agents — auto-loads spec files
-listed in per-task jsonl manifests. Empty spec = sub-agents write generic
-code. Real spec = sub-agents match the team's actual patterns.
+**Your job**: help them populate two sibling knowledge directories:
+
+- \`.trellis/spec/\` — agent-facing engineering specs. These are execution
+  rules loaded by \`trellis-implement\` and \`trellis-check\` sub-agents.
+- \`.trellis/user/\` — user-facing project context docs. These explain the same
+  project reality in Simplified Chinese, with English technical terms preserved,
+  so humans can quickly understand the repo before reading specs or code.
+
+Empty spec = sub-agents write generic code. Empty user docs = developers lack a
+readable project map. Fill both during bootstrap.
 
 Don't dump instructions. Open with a short greeting, figure out if the repo
 has any existing convention docs (CLAUDE.md, .cursorrules, etc.), and drive
@@ -250,7 +272,7 @@ ${checklistMarkdown}
 
 ---
 
-## Spec files to populate
+## Knowledge files to populate
 `;
 
   const backendSection = `
@@ -286,6 +308,32 @@ ${checklistMarkdown}
 
 \`.trellis/spec/guides/\` contains general thinking guides pre-filled with
 best practices. Customize only if something clearly doesn't fit this project.
+
+### User-facing context docs
+
+\`.trellis/user/\` is the human-readable sibling of \`.trellis/spec/\`.
+
+Write these docs in Simplified Chinese, while keeping technical terms in English
+(for example CLI, backend, frontend, submodule, template, manifest). They should
+be descriptive, readable, and useful for a developer trying to understand the
+project context.
+
+Recommended structure:
+
+- \`.trellis/user/index.md\`: project overview, package map, reading order, and
+  how \`.trellis/user/\` relates to \`.trellis/spec/\`.
+- Single-repo projects: add \`backend.md\` / \`frontend.md\` when those layers
+  exist.
+- Monorepo projects: add one readable page per package, such as
+  \`.trellis/user/<package>.md\`.
+
+Important distinction:
+
+- Do not mirror every spec file mechanically.
+- Do not write agent checklists in \`.trellis/user/\`.
+- Translate the rules and examples from \`.trellis/spec/\` into human context:
+  what each package does, where important code lives, how changes usually flow,
+  and what mistakes to avoid.
 
 ---
 
@@ -327,6 +375,15 @@ codebase will cause sub-agents to write code that looks out of place.
 
 If the team has known tech debt, document the current state — improvement
 is a separate conversation, not a bootstrap concern.
+
+### Step 4: Synchronize user docs with spec docs
+
+After each package/layer spec is filled, update \`.trellis/user/\` with the same
+project reality in human-facing language. The two directories have the same
+scope but different audiences:
+
+- \`.trellis/spec/\` tells agents what to do.
+- \`.trellis/user/\` tells humans what this project is and how to navigate it.
 
 ---
 
@@ -531,11 +588,14 @@ File layout (mention when they ask "where does what live"):
 - \`.trellis/.runtime/sessions/<session>.json\` — session active-task state, gitignored
 - \`.trellis/tasks/<task>/{implement,check}.jsonl\` — per-task context manifests
 - \`.trellis/spec/\` — project-wide conventions (source of truth)
+- \`.trellis/user/\` — user-facing project context docs, written for humans
 - \`.trellis/workspace/${developer}/journal-*.md\` — their session log,
   rotated at ~2000 lines
 
 ### 3. This project's actual conventions
 
+- Start from \`.trellis/user/\` if it exists — project context, package map,
+  reading order, and where to find the right specs.
 - Summarize \`.trellis/spec/\` for them — what coding conventions this
   specific team enforces.
 - Point at the last 5 entries in \`.trellis/tasks/archive/\` as a rhythm

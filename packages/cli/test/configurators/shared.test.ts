@@ -1,4 +1,4 @@
-import { describe, expect, it, vi, afterEach } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
 import {
   getPythonCommandForPlatform,
   replacePythonCommandLiterals,
@@ -66,9 +66,9 @@ describe("replacePythonCommandLiterals", () => {
 
   it("replaces multiple occurrences on win32", () => {
     mockPlatform("win32");
-    expect(
-      replacePythonCommandLiterals("python3 a.py && python3 b.py"),
-    ).toBe("python a.py && python b.py");
+    expect(replacePythonCommandLiterals("python3 a.py && python3 b.py")).toBe(
+      "python a.py && python b.py",
+    );
   });
 
   it("preserves shebang lines on win32", () => {
@@ -116,13 +116,13 @@ describe("replacePythonCommandLiterals", () => {
     const input = [
       "#!/usr/bin/env python3",
       "# comment about python3",
-      "exec python3 \"$0\" \"$@\"",
+      'exec python3 "$0" "$@"',
       "python3 ./.trellis/scripts/task.py",
     ].join("\n");
     const expected = [
       "#!/usr/bin/env python3",
       "# comment about python",
-      "exec python \"$0\" \"$@\"",
+      'exec python "$0" "$@"',
       "python ./.trellis/scripts/task.py",
     ].join("\n");
     expect(replacePythonCommandLiterals(input)).toBe(expected);
@@ -153,7 +153,9 @@ describe("resolvePlaceholders", () => {
     it("resolves {{PYTHON_CMD}}", () => {
       const result = resolvePlaceholders("run {{PYTHON_CMD}} script.py");
       const expected =
-        process.platform === "win32" ? "run python script.py" : "run python3 script.py";
+        process.platform === "win32"
+          ? "run python script.py"
+          : "run python3 script.py";
       expect(result).toBe(expected);
     });
 
@@ -201,9 +203,9 @@ describe("resolvePlaceholders", () => {
     });
 
     it("handles hyphenated command names", () => {
-      expect(
-        resolvePlaceholders("{{CMD_REF:finish-work}}", claudeCtx),
-      ).toBe("/trellis:finish-work");
+      expect(resolvePlaceholders("{{CMD_REF:finish-work}}", claudeCtx)).toBe(
+        "/trellis:finish-work",
+      );
       expect(
         resolvePlaceholders("{{CMD_REF:check-cross-layer}}", codexCtx),
       ).toBe("$check-cross-layer");
@@ -362,7 +364,8 @@ describe("resolvePlaceholders", () => {
 
   describe("blank line cleanup", () => {
     it("collapses 3+ consecutive blank lines to 2", () => {
-      const template = "A\n\n{{#AGENT_CAPABLE}}\nRemoved\n{{/AGENT_CAPABLE}}\n\nB";
+      const template =
+        "A\n\n{{#AGENT_CAPABLE}}\nRemoved\n{{/AGENT_CAPABLE}}\n\nB";
       const result = resolvePlaceholders(template, cursorCtx);
       expect(result).not.toMatch(/\n{3,}/);
       expect(result).toContain("A");

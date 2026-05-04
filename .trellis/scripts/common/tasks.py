@@ -102,11 +102,8 @@ def children_progress(
     """
     if not children:
         return ""
-    # A child missing from active statuses has been archived (cmd_archive
-    # sets status=completed before moving the dir). Count it as done so
-    # parent progress doesn't regress when children are archived.
     done = sum(
         1 for c in children
-        if c not in all_statuses or all_statuses.get(c) in ("completed", "done")
+        if all_statuses.get(c) in ("completed", "done")
     )
     return f" [{done}/{len(children)} done]"

@@ -327,7 +327,9 @@ describe("matchesOriginalTemplate", () => {
   });
 
   it("returns false when file does not exist", () => {
-    expect(matchesOriginalTemplate(tmpDir, "missing.txt", "content")).toBe(false);
+    expect(matchesOriginalTemplate(tmpDir, "missing.txt", "content")).toBe(
+      false,
+    );
   });
 
   it("returns true when file matches original content exactly", () => {
@@ -405,10 +407,16 @@ describe("initializeHashes", () => {
   it("hashes files in managed directories", () => {
     // Create .trellis with a script and .claude with a command
     fs.mkdirSync(path.join(tmpDir, ".trellis", "scripts"), { recursive: true });
-    fs.writeFileSync(path.join(tmpDir, ".trellis", "scripts", "task.py"), "print('hello')");
+    fs.writeFileSync(
+      path.join(tmpDir, ".trellis", "scripts", "task.py"),
+      "print('hello')",
+    );
 
     fs.mkdirSync(path.join(tmpDir, ".claude", "commands"), { recursive: true });
-    fs.writeFileSync(path.join(tmpDir, ".claude", "commands", "start.md"), "# Start");
+    fs.writeFileSync(
+      path.join(tmpDir, ".claude", "commands", "start.md"),
+      "# Start",
+    );
 
     const count = initializeHashes(tmpDir);
     expect(count).toBeGreaterThanOrEqual(2);
@@ -419,8 +427,13 @@ describe("initializeHashes", () => {
   });
 
   it("excludes workspace and tasks directories", () => {
-    fs.mkdirSync(path.join(tmpDir, ".trellis", "workspace"), { recursive: true });
-    fs.writeFileSync(path.join(tmpDir, ".trellis", "workspace", "data.md"), "user data");
+    fs.mkdirSync(path.join(tmpDir, ".trellis", "workspace"), {
+      recursive: true,
+    });
+    fs.writeFileSync(
+      path.join(tmpDir, ".trellis", "workspace", "data.md"),
+      "user data",
+    );
     fs.mkdirSync(path.join(tmpDir, ".trellis", "tasks"), { recursive: true });
     fs.writeFileSync(path.join(tmpDir, ".trellis", "tasks", "task.json"), "{}");
 
@@ -434,12 +447,27 @@ describe("initializeHashes", () => {
   });
 
   it("excludes spec/ directory files from hashing", () => {
-    fs.mkdirSync(path.join(tmpDir, ".trellis", "spec", "guides"), { recursive: true });
-    fs.mkdirSync(path.join(tmpDir, ".trellis", "spec", "frontend"), { recursive: true });
-    fs.mkdirSync(path.join(tmpDir, ".trellis", "spec", "backend"), { recursive: true });
-    fs.writeFileSync(path.join(tmpDir, ".trellis", "spec", "guides", "index.md"), "# Guides");
-    fs.writeFileSync(path.join(tmpDir, ".trellis", "spec", "frontend", "index.md"), "# Frontend");
-    fs.writeFileSync(path.join(tmpDir, ".trellis", "spec", "backend", "index.md"), "# Backend");
+    fs.mkdirSync(path.join(tmpDir, ".trellis", "spec", "guides"), {
+      recursive: true,
+    });
+    fs.mkdirSync(path.join(tmpDir, ".trellis", "spec", "frontend"), {
+      recursive: true,
+    });
+    fs.mkdirSync(path.join(tmpDir, ".trellis", "spec", "backend"), {
+      recursive: true,
+    });
+    fs.writeFileSync(
+      path.join(tmpDir, ".trellis", "spec", "guides", "index.md"),
+      "# Guides",
+    );
+    fs.writeFileSync(
+      path.join(tmpDir, ".trellis", "spec", "frontend", "index.md"),
+      "# Frontend",
+    );
+    fs.writeFileSync(
+      path.join(tmpDir, ".trellis", "spec", "backend", "index.md"),
+      "# Backend",
+    );
 
     const count = initializeHashes(tmpDir);
     const hashes = loadHashes(tmpDir);
@@ -448,6 +476,20 @@ describe("initializeHashes", () => {
     expect(hashes).not.toHaveProperty(".trellis/spec/guides/index.md");
     expect(hashes).not.toHaveProperty(".trellis/spec/frontend/index.md");
     expect(hashes).not.toHaveProperty(".trellis/spec/backend/index.md");
+    expect(count).toBe(0);
+  });
+
+  it("excludes user/ directory files from hashing", () => {
+    fs.mkdirSync(path.join(tmpDir, ".trellis", "user"), { recursive: true });
+    fs.writeFileSync(
+      path.join(tmpDir, ".trellis", "user", "index.md"),
+      "# 项目上下文",
+    );
+
+    const count = initializeHashes(tmpDir);
+    const hashes = loadHashes(tmpDir);
+
+    expect(hashes).not.toHaveProperty(".trellis/user/index.md");
     expect(count).toBe(0);
   });
 
@@ -487,9 +529,7 @@ describe("initializeHashes", () => {
     const count = initializeHashes(tmpDir);
     const hashes = loadHashes(tmpDir);
 
-    expect(hashes).toHaveProperty(
-      ".pi/skills/trellis-update-spec/SKILL.md",
-    );
+    expect(hashes).toHaveProperty(".pi/skills/trellis-update-spec/SKILL.md");
     expect(count).toBe(1);
   });
 });
