@@ -56,6 +56,7 @@ pnpm --filter trellis-sq test
 
 - Upstream project: <https://github.com/mindfold-ai/Trellis>
 - Fork remote: <https://github.com/sayoriqwq/Trellis>
+- Fork feature map: [`features.md`](./features.md)
 - Local modification log: [`change.md`](./change.md)
 
 When syncing from upstream, treat `change.md` as the fork-local ledger. Append

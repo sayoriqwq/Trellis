@@ -25,9 +25,11 @@ workspace memory、platform adapter 和 skills 思路，同时根据 `sayoriqwq`
 如果你是第一次看这个 fork，建议按这个顺序：
 
 1. 读本文件，先确认这是个人 fork，不是上游主仓库。
-2. 读 [Trellis CLI 项目说明](./trellis.md)，理解核心代码在哪里。
-3. 看根目录 [`change.md`](../../change.md)，了解本 fork 相对上游的长期差异。
-4. 真正开始改代码或模板前，再读 `.trellis/spec/trellis/...` 中对应 specs。
+2. 读根目录 [`features.md`](../../features.md)，理解本 fork 相对原 Trellis 多了
+   哪些当前能力。
+3. 读 [Trellis CLI 项目说明](./trellis.md)，理解核心代码在哪里。
+4. 看根目录 [`change.md`](../../change.md)，了解本 fork 相对上游的长期差异。
+5. 真正开始改代码或模板前，再读 `.trellis/spec/trellis/...` 中对应 specs。
 
 ## 命令命名
 
@@ -69,6 +71,8 @@ Trellis workflow 的收尾阶段会要求同时判断两类知识是否需要更
 ## 写作约定
 
 - 用简体中文解释上下文。
+- 这个 fork 默认面向 `sayoriqwq` 这个 developer；`sayoriqwq` 偏好中文协作语境，
+  所以面向 user 或 developer 阅读的文档必须使用简体中文编写。
 - 保留 English 技术术语，例如 CLI、TypeScript、submodule、template、manifest。
 - 优先解释项目真实现状，不写愿景式描述。
 - 面向 user 的文档可以更连贯、更具叙述性；面向 agent 的 spec 保持规则化。
