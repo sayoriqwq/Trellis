@@ -1,6 +1,6 @@
 # Local Files Generated After Init
 
-`trellis init` writes the Trellis runtime into the user project. Later, `trellis update` tries to update Trellis-managed template files, but it uses `.trellis/.template-hashes.json` to determine which files have already been modified by the user.
+`trellis-sq init` writes the Trellis runtime into the user project. Later, `trellis-sq update` tries to update Trellis-managed template files, but it uses `.trellis/.template-hashes.json` to determine which files have already been modified by the user.
 
 This page only describes files that are visible and editable inside the user project.
 
@@ -51,7 +51,7 @@ When modifying a platform directory, also confirm whether `.trellis/workflow.md`
 
 ## Meaning Of Template Hashes
 
-`.trellis/.template-hashes.json` records the content hash from the last time Trellis wrote a template file. `trellis update` uses it to distinguish three cases:
+`.trellis/.template-hashes.json` records the content hash from the last time Trellis wrote a template file. `trellis-sq update` uses it to distinguish three cases:
 
 | Case | Update behavior |
 | --- | --- |
@@ -75,7 +75,7 @@ Editable by default:
 Do not edit by default:
 
 - Global npm install directory
-- `node_modules/@mindfoldhq/trellis`
+- `node_modules/trellis-sq`
 - Trellis GitHub repository source code
 - Concrete state files under `.trellis/.runtime/**`
 - Hash contents inside `.trellis/.template-hashes.json`

@@ -37,7 +37,7 @@ max_journal_lines: 2000
 #-------------------------------------------------------------------------------
 
 # Declare packages for monorepo projects.
-# Trellis auto-detects workspaces during `trellis init`, but you can also
+# Trellis auto-detects workspaces during `trellis-sq init`, but you can also
 # configure them manually here.
 #
 # packages:
@@ -46,8 +46,7 @@ max_journal_lines: 2000
 #   backend:
 #     path: packages/backend
 #   docs:
-#     path: docs-site
-#     type: submodule
+#     path: docs
 
 # Default package used when --package is not specified.
 # default_package: frontend
@@ -56,10 +55,4 @@ max_journal_lines: 2000
 packages:
   trellis:
     path: packages/cli
-  docs-site:
-    path: docs-site
-    type: submodule
-  marketplace:
-    path: marketplace
-    type: submodule
-default_package: @mindfoldhq/trellis
+default_package: trellis

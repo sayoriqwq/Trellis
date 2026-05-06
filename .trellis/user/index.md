@@ -1,66 +1,61 @@
 # 项目上下文总览
 
-## 这个目录的作用
+## 这个仓库是什么
 
-`.trellis/user/` 和 `.trellis/spec/` 的职责一致：保存这个项目的真实上下文、约定和边界。
+这个 repository 是 `sayoriqwq` fork 原
+`mindfold-ai/Trellis` 项目后用于个人自定义和改造 Trellis 的工作区。
 
-区别在于读者不同：
+它的目标是服务个人使用：保留 Trellis 原有的 AI workflow、spec、task、
+workspace memory、platform adapter 和 skills 思路，同时根据 `sayoriqwq`
+自己的使用习惯调整 CLI、模板和本地规则。
 
-| 目录 | 主要读者 | 写法 |
-| --- | --- | --- |
-| `.trellis/spec/` | agent | 更像执行规范，强调必须遵守的规则、检查项、禁止模式 |
-| `.trellis/user/` | user | 更像项目说明书，强调背景、结构、为什么这样做、怎么理解代码库 |
+## 项目边界
 
-这里的文档使用简体中文，技术术语保留 English。它们不是替代 spec，而是帮助人先建立项目地图，再决定要读哪些 spec 或代码。
-
-## 项目一眼看懂
-
-这个 repository 是 Trellis 自身的工作区。它同时包含三个 package：
+当前仓库只把 `packages/cli` 作为核心 source package：
 
 | Package | 路径 | 角色 |
 | --- | --- | --- |
-| `trellis` | `packages/cli` | Trellis CLI，本项目的核心 npm package |
-| `docs-site` | `docs-site` | Mintlify 文档站 submodule |
-| `marketplace` | `marketplace` | Trellis resource marketplace submodule |
+| `trellis` | `packages/cli` | fork 后的 Trellis SQ CLI 源码，发布/链接后提供 `trellis-sq` 命令 |
 
-三者的关系可以这样理解：
-
-- `packages/cli` 负责把 Trellis 安装到用户项目里，包括 workflow、skills、agents、hooks、templates、migrations。
-- `docs-site` 负责对外解释 Trellis 怎么用、怎么工作、怎么贡献。
-- `marketplace` 负责存放可下载的 spec templates 和 skills，供 Trellis CLI 或用户安装使用。
+原上游仓库里的 `docs-site` 和 `marketplace` git submodule 已经从本 fork
+移除。本仓库不再把文档站或 marketplace 资源仓库作为本地 package 维护。
 
 ## 先读什么
 
-如果你是第一次看这个项目，建议按这个顺序：
+如果你是第一次看这个 fork，建议按这个顺序：
 
-1. 读本文件，先知道项目分成哪几块。
+1. 读本文件，先确认这是个人 fork，不是上游主仓库。
 2. 读 [Trellis CLI 项目说明](./trellis.md)，理解核心代码在哪里。
-3. 如果要改文档站，读 [Docs-Site 项目说明](./docs-site.md)。
-4. 如果要改 marketplace 资源，读 [Marketplace 项目说明](./marketplace.md)。
-5. 真正开始改代码或文档前，再去读对应的 `.trellis/spec/<package>/...`。
+3. 看根目录 [`change.md`](../../change.md)，了解本 fork 相对上游的长期差异。
+4. 真正开始改代码或模板前，再读 `.trellis/spec/trellis/...` 中对应 specs。
 
-## 当前工作区的特殊状态
+## 命令命名
 
-`docs-site` 和 `marketplace` 是 git submodule。当前 task 探索时发现，主仓库记录的 submodule gitlink commit 无法从远端直接获取，所以本轮 user/spec 文档中的这两部分是基于各自 remote `origin/main` 的可用内容总结出来的。
+这个 fork 的 CLI binary 是 `trellis-sq`：
 
-这意味着：
+```bash
+trellis-sq init -u sayoriqwq
+trellis-sq update
+trellis-sq uninstall
+```
 
-- 这些说明足够描述仓库职责和常规改动方式。
-- 如果你要实际编辑 `docs-site` 或 `marketplace` 内容，先确认 submodule 能 checkout 到你要改的 revision。
-- 不要把这两个目录当作普通子目录；它们是独立 repository。
+内部 workflow、skill、agent 和平台 command 仍然沿用 Trellis 语义，例如
+`trellis-before-dev`、`trellis-check`、`/trellis:finish-work`。这些名字属于
+工作流内部 contract，不要因为 CLI binary 变成 `trellis-sq` 就自动批量重命名。
 
 ## 和 `.trellis/spec/` 的配合方式
 
-`.trellis/user/` 解决“我现在在哪、这个项目怎么组织”的问题。
+`.trellis/user/` 解决“这个 fork 是什么、现在在哪、为什么这样组织”的问题。
 
-`.trellis/spec/` 解决“我要动某个地方时，必须遵守什么规则”的问题。
+`.trellis/spec/` 解决“改某个地方时必须遵守什么规则”的问题。
 
 例如：
 
-- 你想知道 Trellis CLI 是什么，先读 `user/trellis.md`。
-- 你要改 `packages/cli/src/commands/init.ts`，再读 `spec/trellis/backend/index.md` 和相关 backend specs。
-- 你要改 Mintlify navigation，先读 `user/docs-site.md`，再读 `spec/docs-site/frontend/*` 和 `spec/docs-site/backend/*`。
-- 你要加一个 marketplace skill，先读 `user/marketplace.md`，再读 `spec/marketplace/*`。
+- 你想知道 Trellis SQ CLI 是什么，先读 `user/trellis.md`。
+- 你要改 `packages/cli/src/commands/init.ts`，再读
+  `spec/trellis/backend/index.md` 和相关 backend specs。
+- 你要改 generated skills 或 platform templates，读对应 template 旁边的实现，
+  并检查 `.trellis/spec/trellis/frontend/*` 和 backend template 规则。
 
 ## 什么时候维护这个目录
 
@@ -74,6 +69,6 @@ Trellis workflow 的收尾阶段会要求同时判断两类知识是否需要更
 ## 写作约定
 
 - 用简体中文解释上下文。
-- 保留 English 技术术语，例如 CLI、TypeScript、submodule、Mintlify、MDX、template、manifest。
+- 保留 English 技术术语，例如 CLI、TypeScript、submodule、template、manifest。
 - 优先解释项目真实现状，不写愿景式描述。
 - 面向 user 的文档可以更连贯、更具叙述性；面向 agent 的 spec 保持规则化。

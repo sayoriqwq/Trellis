@@ -1,15 +1,16 @@
-# 贡献指南
+# Trellis SQ 贡献说明
 
-感谢你对 Trellis 的关注！本文档提供参与项目贡献的指南。
+这是 `sayoriqwq` 的 Trellis 个人 fork。这里的改动默认视为 fork-local
+自定义，除非任务明确说明要向上游项目提交。
 
 ## 贡献方式
 
 ### 报告 Bug
 
-提交 Bug 前，请先查看 [已有 Issues](https://github.com/mindfold-ai/Trellis/issues) 避免重复。
+提交 Bug 前，先判断问题属于本 fork，还是属于原上游项目。
 
 报告 Bug 时请包含：
-- Trellis 版本 (`trellis --version`)
+- Trellis SQ 版本 (`trellis-sq --version`)
 - Node.js 版本 (`node --version`)
 - 操作系统
 - 复现步骤
@@ -49,11 +50,11 @@
 
 ### 开始开发
 
-1. **Fork 仓库** 到你的 GitHub 账号
+1. **克隆这个 fork**
 
-2. **克隆你的 Fork**
+2. **进入仓库**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/Trellis.git
+   git clone https://github.com/sayoriqwq/Trellis.git
    cd Trellis
    ```
 

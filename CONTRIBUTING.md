@@ -1,15 +1,18 @@
-# Contributing to Trellis
+# Contributing to Trellis SQ
 
-Thanks for your interest in contributing to Trellis! This document provides guidelines for contributing to the project.
+This repository is `sayoriqwq`'s personal fork of Trellis. Contributions here
+should be treated as fork-local changes unless a task explicitly says the work
+will be proposed upstream.
 
 ## Ways to Contribute
 
 ### Reporting Bugs
 
-Before creating a bug report, please check [existing issues](https://github.com/mindfold-ai/Trellis/issues) to avoid duplicates.
+Before creating a bug report, check whether it belongs to this fork or to the
+original upstream project.
 
 When reporting a bug, include:
-- Trellis version (`trellis --version`)
+- Trellis SQ version (`trellis-sq --version`)
 - Node.js version (`node --version`)
 - Operating system
 - Steps to reproduce
@@ -49,11 +52,11 @@ Code contributions are welcome for:
 
 ### Getting Started
 
-1. **Fork the repository** on GitHub
+1. **Clone this fork**
 
-2. **Clone your fork**
+2. **Enter the repository**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/Trellis.git
+   git clone https://github.com/sayoriqwq/Trellis.git
    cd Trellis
    ```
 

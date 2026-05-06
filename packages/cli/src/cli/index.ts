@@ -31,7 +31,7 @@ function checkForUpdates(cwd: string): void {
         `\n⚠️  Trellis update available: ${projectVersion} → ${cliVersion}`,
       ),
     );
-    console.log(chalk.gray(`   Run: trellis update\n`));
+    console.log(chalk.gray(`   Run: trellis-sq update\n`));
   } else if (comparison < 0) {
     // CLI is older than project - CLI needs updating
     console.log(
@@ -52,15 +52,15 @@ if (fs.existsSync(path.join(cwd, DIR_NAMES.WORKFLOW))) {
 const program = new Command();
 
 program
-  .name("trellis")
+  .name("trellis-sq")
   .description(
-    "AI-assisted development workflow framework for Cursor, Claude Code and more",
+    "sayoriqwq's personal Trellis fork for AI-assisted development workflows",
   )
   .version(VERSION, "-v, --version", "output the version number");
 
 program
   .command("init")
-  .description("Initialize trellis in the current project")
+  .description("Initialize trellis-sq in the current project")
   .option("--cursor", "Include Cursor commands")
   .option("--claude", "Include Claude Code commands")
   .option("--opencode", "Include OpenCode commands")
@@ -114,7 +114,7 @@ program
 
 program
   .command("update")
-  .description("Update trellis configuration and commands to latest version")
+  .description("Update trellis-sq configuration and commands to latest version")
   .option("--dry-run", "Preview changes without applying them")
   .option("-f, --force", "Overwrite all changed files without asking")
   .option("-s, --skip-all", "Skip all changed files without asking")

@@ -87,6 +87,10 @@ const LEGACY_UNTRACKED_AGENTS_MD_BLOCK_HASHES = new Set<string>([
   // section was added, so old untouched projects can be updated without a
   // false "modified by you" conflict.
   "c1f511b1cfc1902f2147da159f09cc51f380b0c9e341cdb3ac5dea5233f3e307",
+  // Same legacy block after this fork renamed external CLI guidance to
+  // trellis-sq. Keep it so fork-local projects can still auto-upgrade the
+  // managed AGENTS.md block.
+  "49df482d5b9d99f6f556f165bbbd3f4477e73e2601abe19f89ba3fda1e3b8c6c",
 ]);
 
 // Paths that should never be touched (true user data)
@@ -1686,7 +1690,7 @@ export async function update(options: UpdateOptions): Promise<void> {
   // Check if Trellis is initialized
   if (!fs.existsSync(path.join(cwd, DIR_NAMES.WORKFLOW))) {
     console.log(chalk.red("Error: Trellis not initialized in this directory."));
-    console.log(chalk.gray("Run 'trellis init' first."));
+    console.log(chalk.gray("Run 'trellis-sq init' first."));
     return;
   }
 
@@ -1742,7 +1746,9 @@ export async function update(options: UpdateOptions): Promise<void> {
         chalk.gray(`  1. Update your CLI: npm install -g ${PACKAGE_NAME}`),
       );
       console.log(
-        chalk.gray(`  2. Force downgrade: trellis update --allow-downgrade\n`),
+        chalk.gray(
+          `  2. Force downgrade: trellis-sq update --allow-downgrade\n`,
+        ),
       );
       return;
     }
@@ -1765,7 +1771,7 @@ export async function update(options: UpdateOptions): Promise<void> {
   if (isUnknownVersion) {
     console.log(
       chalk.yellow(
-        "⚠️  No version file found. Skipping migrations — run trellis init to fix.",
+        "⚠️  No version file found. Skipping migrations — run trellis-sq init to fix.",
       ),
     );
     console.log(chalk.gray("   Template updates will still be applied."));
@@ -1903,7 +1909,7 @@ export async function update(options: UpdateOptions): Promise<void> {
             ),
         );
         console.log("");
-        console.log(chalk.yellow(`  Run: trellis update --migrate`));
+        console.log(chalk.yellow(`  Run: trellis-sq update --migrate`));
         console.log("");
         console.log(
           chalk.gray(
@@ -2364,7 +2370,7 @@ export async function update(options: UpdateOptions): Promise<void> {
         prdContent += `**From Version**: ${projectVersion}\n`;
         prdContent += `**To Version**: ${cliVersion}\n`;
         prdContent += `**Assignee**: ${currentDeveloper}\n\n`;
-        prdContent += `## Status\n\n- [ ] Review migration guide\n- [ ] Update custom files\n- [ ] Run \`trellis update --migrate\`\n- [ ] Test workflows\n\n`;
+        prdContent += `## Status\n\n- [ ] Review migration guide\n- [ ] Update custom files\n- [ ] Run \`trellis-sq update --migrate\`\n- [ ] Test workflows\n\n`;
 
         for (const {
           version,

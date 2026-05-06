@@ -1,6 +1,6 @@
 # Trellis CLI Frontend Guidelines
 
-> The `@mindfoldhq/trellis` package currently has no runtime frontend.
+> The `trellis-sq` package currently has no runtime frontend.
 
 ## Overview
 

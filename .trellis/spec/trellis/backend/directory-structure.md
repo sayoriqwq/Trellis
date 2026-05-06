@@ -19,7 +19,7 @@ packages/cli/
 ├── scripts/             # Build/release helper scripts
 ├── src/
 │   ├── cli/             # Commander setup and top-level error boundary
-│   ├── commands/        # trellis init/update/uninstall implementations
+│   ├── commands/        # trellis-sq init/update/uninstall implementations
 │   ├── configurators/   # Platform-specific install/update logic
 │   ├── constants/       # Shared path/version constants
 │   ├── migrations/      # File migrations and version manifests

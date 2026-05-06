@@ -37,7 +37,7 @@ max_journal_lines: 2000
 #-------------------------------------------------------------------------------
 
 # Declare packages for monorepo projects.
-# Trellis auto-detects workspaces during `trellis init`, but you can also
+# Trellis auto-detects workspaces during `trellis-sq init`, but you can also
 # configure them manually here.
 #
 # packages:
@@ -46,8 +46,7 @@ max_journal_lines: 2000
 #   backend:
 #     path: packages/backend
 #   docs:
-#     path: docs-site
-#     type: submodule
+#     path: docs
 #   # For polyrepo / meta-repo layouts (independent .git in each subdir),
 #   # mark the package with `git: true`. The runtime treats it as an
 #   # independent repository for things like git-context display.

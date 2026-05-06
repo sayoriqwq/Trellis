@@ -1,6 +1,6 @@
-# Trellis CLI Backend Guidelines
+# Trellis SQ CLI Backend Guidelines
 
-> Project-specific standards for the `@mindfoldhq/trellis` package.
+> Project-specific standards for the `trellis-sq` package.
 
 ## Overview
 
@@ -53,7 +53,7 @@ platform directories, and template hash manifests.
 - Adding new path literals instead of extending `DIR_NAMES`, `FILE_NAMES`, or
   `PATHS`.
 - Prompting from lower-level utilities in ways that break non-TTY execution.
-- Treating docs-site or marketplace submodules as regular source packages; they
-  are separate content repositories.
+- Reintroducing docs-site or marketplace as source packages in this fork without
+  an explicit repository-boundary decision.
 
 **Language**: All documentation should be written in English.

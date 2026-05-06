@@ -49,9 +49,9 @@ Examples:
 ## Verification Commands
 
 ```bash
-pnpm --filter @mindfoldhq/trellis lint
-pnpm --filter @mindfoldhq/trellis typecheck
-pnpm --filter @mindfoldhq/trellis test
+pnpm --filter trellis-sq lint
+pnpm --filter trellis-sq typecheck
+pnpm --filter trellis-sq test
 ```
 
 Use the root shortcuts (`pnpm lint`, `pnpm typecheck`, `pnpm test`) when working
@@ -63,7 +63,7 @@ from the repository root.
   type guards, or explicit interfaces.
 - Do not add non-null assertions. Narrow with checks.
 - Do not add broad refactors while fixing command behavior.
-- Do not update `.trellis/spec/` from `trellis update`; update protects specs as
+- Do not update `.trellis/spec/` from `trellis-sq update`; update protects specs as
   user-owned content.
 - Do not rely only on snapshot-like filesystem existence checks when behavior
   needs content assertions.

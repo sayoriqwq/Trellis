@@ -25,6 +25,6 @@ If you're using Codex or another agent-capable tool, additional project-scoped h
   - Long-running or blocking tasks where a worker can run independently.
   - Isolation for risky changes or checks
 
-Managed by Trellis. Edits outside this block are preserved; edits inside may be overwritten by a future `trellis update`.
+Managed by Trellis SQ. Edits outside this block are preserved; edits inside may be overwritten by a future `trellis-sq update`.
 
 <!-- TRELLIS:END -->

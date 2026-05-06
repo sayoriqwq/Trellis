@@ -33,8 +33,8 @@ packages/cli/src/templates/
   and is resolved by `packages/cli/src/configurators/shared.ts`.
 - Markdown root templates such as `AGENTS.md` belong under
   `packages/cli/src/templates/markdown/`.
-- Do not put project docs-site content in `packages/cli`; docs-site is a
-  separate submodule.
+- Do not put public documentation-site or marketplace content in `packages/cli`
+  unless this fork explicitly adopts those repositories again.
 
 ## Examples
 
