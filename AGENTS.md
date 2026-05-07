@@ -18,7 +18,24 @@ If you're using Codex, project-scoped helpers may also live in:
 - `.agents/skills/` for reusable Trellis skills
 - `.codex/agents/` for optional custom subagents
 
+If you're using Codex or another agent-capable tool, additional project-scoped helpers may live in:
+- `.agents/skills/` — reusable Trellis skills
+- `.codex/agents/` — optional custom subagents
+
+## Subagents
+
+- ALWAYS wait for every spawned subagent to reach a terminal status before yielding, acting on partial results, or spawning followups.
+  - On Codex, this means calling the `wait` tool with the subagent's thread id (requires `multi_agent_v2`). Do NOT infer completion from elapsed time.
+  - On Claude Code / OpenCode, this means awaiting the Task/agent tool result before continuing.
+- NEVER cancel or re-spawn a subagent that hasn't finished. If a subagent appears stuck, raise the wait timeout (Codex default 30s, max 1h) before judging it broken.
+- Spawn subagents automatically when:
+  - Parallelizable work (e.g., install + verify, npm test + typecheck, multiple tasks from plan)
+  - Long-running or blocking tasks where a worker can run independently
+  - Isolation for risky changes or checks
+
 Keep this managed block so 'trellis-sq update' can refresh the instructions.
+
+Managed by Trellis. Edits outside this block are preserved; edits inside may be overwritten by a future `trellis-sq update`.
 
 <!-- TRELLIS:END -->
 
@@ -53,3 +70,15 @@ Keep this managed block so 'trellis-sq update' can refresh the instructions.
   模块维持这项能力、遇到 upstream 冲突时应如何处理。
 - 不要把纯实现 churn 列为 feature，除非它改变 user-facing 行为或 upstream-sync
   contract。
+
+## upstream sync workflow
+
+- 当用户要求同步 `mindfold-ai/Trellis`、merge upstream、解决 upstream 冲突、查看上游
+  新增功能并合并到本 fork 时，必须使用 `.agents/skills/upstream-sync/SKILL.md`。
+- 这个 workflow 的默认目标是保留 `sayoriqwq` fork 决策，同时吸收上游 CLI、hooks、
+  subagent、template、migration 和测试修复。
+- 同步时默认保留 `trellis-sq` package/binary 身份、单 package 工作树、中文
+  human-facing docs、`change.md`/`features.md` 账本，以及 `sayoriqwq` workspace。
+- 同步完成前必须检查冲突是否重新引入 `docs-site`/`marketplace` submodule、上游
+  dogfood tasks/workspace、`@mindfoldhq/trellis` package 身份、或删除 `.trellis/user/`
+  维护规则。

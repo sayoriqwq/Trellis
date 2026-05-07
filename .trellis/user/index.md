@@ -45,6 +45,19 @@ trellis-sq uninstall
 `trellis-before-dev`、`trellis-check`、`/trellis:finish-work`。这些名字属于
 工作流内部 contract，不要因为 CLI binary 变成 `trellis-sq` 就自动批量重命名。
 
+## 同步上游时
+
+这个 fork 有固定的 upstream sync skill：
+
+```text
+.agents/skills/upstream-sync/SKILL.md
+```
+
+当你要查看 `mindfold-ai/Trellis:main` 新增内容、merge upstream、解决上游冲突，或
+把官方修复吸收到本 fork 时，应使用这个 skill。它会保留本 fork 的核心决策：对外
+`trellis-sq` 命令身份、单 package 工作树、中文 human-facing docs、`change.md` /
+`features.md` 账本，以及 `sayoriqwq` workspace。
+
 ## 和 `.trellis/spec/` 的配合方式
 
 `.trellis/user/` 解决“这个 fork 是什么、现在在哪、为什么这样组织”的问题。

@@ -362,9 +362,9 @@ Before finishing your code-spec update:
 
 ```
 Development Flow:
-  Learn something → $update-spec → Knowledge captured
+  Learn something → `update-spec` (Trellis command) → Knowledge captured
        ↑                                  ↓
-  $break-loop ←──────────────────── Future sessions benefit
+  `break-loop` (Trellis command) ←──────────────────── Future sessions benefit
   (deep bug analysis)
 ```
 

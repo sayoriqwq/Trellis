@@ -91,6 +91,9 @@ const LEGACY_UNTRACKED_AGENTS_MD_BLOCK_HASHES = new Set<string>([
   // trellis-sq. Keep it so fork-local projects can still auto-upgrade the
   // managed AGENTS.md block.
   "49df482d5b9d99f6f556f165bbbd3f4477e73e2601abe19f89ba3fda1e3b8c6c",
+  // Fork-local legacy block with subagent guidance but before the
+  // `.trellis/user/` human-facing docs line was added.
+  "18d6eefa855ca233a6f46a60f9a2553daaecd70a2754b512558597253e5185d9",
 ]);
 
 // Paths that should never be touched (true user data)
@@ -563,8 +566,21 @@ function needsCodexUpgrade(cwd: string): boolean {
     return false;
   }
 
+  // Codex-only marker: legacy Codex installs always tracked the
+  // command-as-skill files `trellis-continue/SKILL.md` and
+  // `trellis-finish-work/SKILL.md` under `.agents/skills/`. Other platforms
+  // that share `.agents/skills/` (e.g. Gemini CLI 0.40+ via the workspace
+  // alias — issue #224) only write the 5 workflow skills (brainstorm,
+  // before-dev, check, break-loop, update-spec) and never these two
+  // command files, so their presence in the hash file is a reliable signal
+  // that the project was originally configured with Codex before `.codex/`
+  // existed as a separate config dir.
   const hashes = loadHashes(cwd);
-  return Object.keys(hashes).some((key) => key.startsWith(".agents/skills/"));
+  const keys = Object.keys(hashes);
+  return (
+    keys.some((key) => key === ".agents/skills/trellis-continue/SKILL.md") ||
+    keys.some((key) => key === ".agents/skills/trellis-finish-work/SKILL.md")
+  );
 }
 
 function preserveExistingClaudeStatusLine(

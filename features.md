@@ -110,6 +110,57 @@
 - 如果模板和本地生成文件同时冲突，优先让“未来用户运行 `trellis-sq init/update` 后
   也得到同等能力”这个目标成立。
 
+## 上游稳定性更新：hooks、subagent 与多平台兼容
+
+**使用时的感知**
+
+- Codex 项目配置默认启用 `multi_agent_v2`，并把 subagent wait 最小等待时间设为 8
+  分钟，减少父线程过早判断 subagent 卡住的问题。
+- 可以用 `TRELLIS_HOOKS=0` 或 `TRELLIS_DISABLE_HOOKS=1` 临时关闭 Trellis hooks。
+- session-start、workflow-state、subagent context 注入在 Codex、Claude、Cursor、
+  OpenCode、Gemini、Qoder、Kiro、CodeBuddy、Droid、Pi 等平台上更稳。
+- Windows / Git Bash / Cygwin / WSL 路径、Python <= 3.11、Codex Linux sandbox、
+  Gemini CLI 0.40.x、OpenCode plugin 版本等场景吸收了上游修复。
+
+**维护边界**
+
+- 这项能力由 `.codex/config.toml`、平台 hooks、`.agents/skills/trellis-*`、平台
+  agent 定义、`packages/cli/src/templates/**`、migration manifests 和对应测试共同
+  维护。
+- 本 fork 在吸收上游稳定性修复时，仍保留 `.trellis/user/` 同步判断和中文
+  human-facing docs policy。
+
+**同步 upstream 时**
+
+- hooks、subagent、platform template、migration、version compare 相关修复默认优先
+  吸收。
+- 如果 upstream 删除或改写本 fork 的 `.trellis/user/` 维护提示，需要在本地和模板中
+  重新补回。
+
+## 可复用 upstream sync workflow
+
+**使用时的感知**
+
+- 以后要求“看看上游新增了什么”“merge upstream”“解决 upstream 冲突”时，agent 会使用
+  `.agents/skills/upstream-sync/SKILL.md` 里的固定流程。
+- 同步前会先查看上游 commit / manifest / diff；同步中会按 fork 决策解决冲突；同步后
+  会更新 `change.md`、必要时更新 `features.md`，并运行验证。
+
+**维护边界**
+
+- `upstream-sync` skill 的核心流程在 `.agents/skills/upstream-sync/SKILL.md`。
+- 长期冲突决策放在
+  `.agents/skills/upstream-sync/references/fork-decisions.md`，避免每次重新推断。
+- `AGENTS.md` 负责让未来 agent 知道何时必须使用这个 skill。
+
+**同步 upstream 时**
+
+- 如果本 fork 的冲突决策变化，先更新 `references/fork-decisions.md`，再同步
+  `AGENTS.md` 和本节。
+- 不要让 upstream merge 重新引入上游 dogfood workspace、task backlog、
+  `@mindfoldhq/trellis` package 身份或 docs-site/marketplace submodule，除非用户明确
+  改变 fork 策略。
+
 ## 面向人的 `.trellis/user/` 项目上下文
 
 **使用时的感知**
@@ -123,7 +174,8 @@
 **维护边界**
 
 - `.trellis/user/` 写给人理解，`.trellis/spec/` 写给 agent 执行。
-- CLI 模板要能生成 `.trellis/user/index.md`，并通过 template hash 追踪相关文件。
+- CLI 模板要能生成 `.trellis/user/index.md`；这些 docs 是 user-owned context，不作为
+  普通模板文件自动覆盖。
 - `check`、`finish-work`、`update-spec`、session-start、subagent、Trellis meta skill
   都应保留 user docs 同步提醒。
 

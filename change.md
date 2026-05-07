@@ -153,3 +153,48 @@ user-perceivable capability contract for day-to-day use and upstream sync.
   upstream conflict handling.
 - Updated `AGENTS.md` so future agents know when and how to revise
   `features.md` after changes.
+
+## 2026-05-07 - sync upstream main to v0.5.4 and add upstream-sync skill
+
+### Summary
+
+Merged official upstream `mindfold-ai/Trellis:main` through commit
+`8afc24e` (`v0.5.4`) into this fork, while preserving the fork-local
+`trellis-sq` identity, single-package repository boundary, Chinese
+human-facing docs policy, and `sayoriqwq` workspace context.
+
+### Upstream Changes Absorbed
+
+- Brought in upstream release manifests from `0.5.0-rc.3` through `0.5.4`.
+- Absorbed hook runtime controls such as `TRELLIS_HOOKS=0` /
+  `TRELLIS_DISABLE_HOOKS=1`.
+- Absorbed Codex `multi_agent_v2` default configuration and the 8-minute
+  minimum wait timeout.
+- Absorbed sub-agent recursion guards, dispatch-prompt fallback requirements,
+  and class-1 marker fallback for failed sub-agent context injection.
+- Absorbed Windows path normalization and Python <= 3.11 f-string fixes for
+  session-start hooks.
+- Absorbed Gemini CLI 0.40.x template compatibility, OpenCode plugin version
+  bump, Codex Linux sandbox Python probe tolerance, and prerelease version
+  comparison fixes.
+
+### Fork-local Conflict Decisions
+
+- Kept `packages/cli/package.json` package name as `trellis-sq`, with only the
+  version advanced to `0.5.4`.
+- Kept the root package scripts targeting `pnpm --filter trellis-sq ...`.
+- Kept README files focused on this fork instead of restoring upstream badges
+  and upstream package identity.
+- Kept `docs-site` and `marketplace` out of the working tree; did not restore
+  `.gitmodules` or docs-site release preflight dependencies.
+- Removed upstream dogfood task directories, upstream developer workspace
+  journals, upstream forum draft, and WeChat image asset from the merge result.
+- Reapplied this fork's `.trellis/user/` maintenance rule to workflow files,
+  session-start hooks, update-spec skill guidance, and template tests.
+
+### New Fork-local Workflow
+
+- Added `.agents/skills/upstream-sync/` as a reusable project skill for future
+  upstream merges.
+- Updated `AGENTS.md` so future agents must use `upstream-sync` for requests to
+  inspect, merge, or resolve conflicts from official upstream.

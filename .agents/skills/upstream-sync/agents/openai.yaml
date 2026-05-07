@@ -1,0 +1,4 @@
+interface:
+  display_name: "Upstream Sync"
+  short_description: "Merge upstream while preserving fork decisions"
+  default_prompt: "Use $upstream-sync to merge mindfold-ai/Trellis:main into this fork and resolve conflicts."
