@@ -52,6 +52,40 @@ pnpm --filter trellis-sq typecheck
 pnpm --filter trellis-sq test
 ```
 
+## Using This Fork In Other Projects
+
+After changing this fork or syncing upstream, refresh the globally linked local
+CLI from this repository:
+
+```bash
+pnpm --filter trellis-sq build
+pnpm --dir packages/cli link --global
+trellis-sq --version
+```
+
+`pnpm --filter trellis-sq link --global` may fail on current pnpm versions with
+`Unknown option: 'recursive'`; use the package-dir form above.
+
+Existing projects do not automatically receive generated workflow/template
+updates just because this repository changed. Run this inside each project that
+already uses Trellis SQ:
+
+```bash
+trellis-sq update
+```
+
+For older projects that predate the 0.5 migration chain, use:
+
+```bash
+trellis-sq update --migrate
+```
+
+For a new project, initialize first:
+
+```bash
+trellis-sq init -u your-name
+```
+
 ## Fork Notes
 
 - Upstream project: <https://github.com/mindfold-ai/Trellis>

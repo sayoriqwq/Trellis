@@ -49,6 +49,39 @@ pnpm --filter trellis-sq typecheck
 pnpm --filter trellis-sq test
 ```
 
+## 让其他项目用到这个 fork 的最新修改
+
+每次在这个 fork 里合并上游或修改 CLI 后，先在本仓库刷新本机全局链接的
+`trellis-sq`：
+
+```bash
+pnpm --filter trellis-sq build
+pnpm --dir packages/cli link --global
+trellis-sq --version
+```
+
+当前 pnpm 版本下，`pnpm --filter trellis-sq link --global` 可能会因为
+`Unknown option: 'recursive'` 失败；使用上面的 `--dir packages/cli` 写法。
+
+已经使用 `trellis-sq` 的其他项目不会自动拿到新的 `.trellis/`、`.agents/`、
+`.codex/`、`.claude/` 或平台模板文件。需要进入每个目标项目执行：
+
+```bash
+trellis-sq update
+```
+
+如果目标项目非常旧，早于 0.5 migration chain，则执行：
+
+```bash
+trellis-sq update --migrate
+```
+
+新项目先初始化：
+
+```bash
+trellis-sq init -u your-name
+```
+
 ## Fork 说明
 
 - 上游项目：<https://github.com/mindfold-ai/Trellis>

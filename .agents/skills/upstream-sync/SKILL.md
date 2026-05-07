@@ -78,6 +78,27 @@ Load `references/fork-decisions.md` before resolving conflicts.
    ```
    Use a clear merge message naming the upstream ref and preserved fork policy.
 
+10. Refresh the local globally linked `trellis-sq` command so this machine uses
+    the merged CLI:
+    ```bash
+    rtk pnpm --filter trellis-sq build
+    rtk pnpm --dir packages/cli link --global
+    rtk trellis-sq --version
+    ```
+    Do not rely on `pnpm --filter trellis-sq link --global` with the current
+    pnpm version; it fails with `Unknown option: 'recursive'`. If a future pnpm
+    version supports it, the package-dir command above is still acceptable.
+
+11. Tell the user how downstream projects receive the update:
+    - A project that already uses `trellis-sq` does not automatically receive
+      new generated `.trellis/`, `.agents/`, `.codex/`, `.claude/`, or platform
+      files just because this fork was merged.
+    - After rebuilding/linking the CLI in this repo, run `trellis-sq update` in
+      each target project.
+    - If the target project's `.trellis/.version` is older than the breaking
+      0.5 migration chain, run `trellis-sq update --migrate`.
+    - For a new project, run `trellis-sq init -u <developer-name>` first.
+
 ## Conflict Priorities
 
 When conflict decisions compete, use this order:
@@ -87,4 +108,3 @@ When conflict decisions compete, use this order:
 3. Prefer upstream implementation fixes over stale local generated copies.
 4. Keep generated templates, local dogfood files, and tests consistent.
 5. Document any intentional divergence in `change.md`.
-

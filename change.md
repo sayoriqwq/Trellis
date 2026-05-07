@@ -198,3 +198,34 @@ human-facing docs policy, and `sayoriqwq` workspace context.
   upstream merges.
 - Updated `AGENTS.md` so future agents must use `upstream-sync` for requests to
   inspect, merge, or resolve conflicts from official upstream.
+
+## 2026-05-07 - document downstream update after local CLI sync
+
+### Summary
+
+Documented the post-merge local install/update steps so future upstream syncs
+also refresh the global `trellis-sq` command and explain how existing projects
+receive generated file updates.
+
+### Changes
+
+- Ran `pnpm --filter trellis-sq build` successfully after the upstream merge.
+- Attempted `pnpm --filter trellis-sq link --global`; current pnpm rejected it
+  with `Unknown option: 'recursive'`.
+- Ran the working equivalent `pnpm --dir packages/cli link --global`, then
+  confirmed `trellis-sq --version` reports `0.5.4`.
+- Updated `.agents/skills/upstream-sync/SKILL.md` so future upstream syncs run
+  build, global link, and version verification automatically after the merge
+  commit.
+- Updated `README.md` and `README_CN.md` with the downstream project rule:
+  existing projects must run `trellis-sq update` to receive new generated
+  `.trellis/`, platform, hook, agent, and skill files; very old projects may
+  need `trellis-sq update --migrate`.
+
+### Upstream Sync Notes
+
+- Keep using `pnpm --filter trellis-sq build` for build.
+- Prefer `pnpm --dir packages/cli link --global` for local global linking unless
+  pnpm changes `link --global` filter behavior in a future version.
+- Updating this CLI repository or global link does not mutate other projects by
+  itself; each project needs its own `trellis-sq update`.

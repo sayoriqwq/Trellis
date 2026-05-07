@@ -145,6 +145,10 @@
   `.agents/skills/upstream-sync/SKILL.md` 里的固定流程。
 - 同步前会先查看上游 commit / manifest / diff；同步中会按 fork 决策解决冲突；同步后
   会更新 `change.md`、必要时更新 `features.md`，并运行验证。
+- merge commit 完成后，会自动在本仓库执行 `pnpm --filter trellis-sq build` 和
+  `pnpm --dir packages/cli link --global`，让本机全局 `trellis-sq` 指向最新 fork。
+- README 会保留“其他项目需要进入项目内执行 `trellis-sq update`”的提醒，避免误以为
+  本仓库更新后所有项目都会自动享用。
 
 **维护边界**
 
@@ -152,6 +156,8 @@
 - 长期冲突决策放在
   `.agents/skills/upstream-sync/references/fork-decisions.md`，避免每次重新推断。
 - `AGENTS.md` 负责让未来 agent 知道何时必须使用这个 skill。
+- 当前 pnpm 版本下，`pnpm --filter trellis-sq link --global` 会失败；维护文档和 skill
+  时保留 `pnpm --dir packages/cli link --global` 这个可工作的链接命令。
 
 **同步 upstream 时**
 
